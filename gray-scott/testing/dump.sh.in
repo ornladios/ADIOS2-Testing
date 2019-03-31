@@ -1,0 +1,11 @@
+#!/bin/sh
+
+BPLS=@ADIOS2_ROOT@/bin/bpls
+
+if [ ! -f gs.bp ]
+then
+  echo "ERROR: gs.bp does not exist."
+  exit 1
+fi
+
+${BPLS} -d gs.bp > gs.bp.dump

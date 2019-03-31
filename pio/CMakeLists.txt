@@ -1,0 +1,46 @@
+set_directory_properties(PROPERTIES EP_BASE ${CMAKE_CURRENT_BINARY_DIR})
+
+set(extra_args)
+if(NetCDF_ROOT)
+  list(APPEND extra_args -DWITH_NETCDF=ON -DNETCDF_DIR=${NetCDF_ROOT})
+elseif(NOT "$ENV{NETCDF_DIR}" STREQUAL "")
+  list(APPEND extra_args -DWITH_NETCDF=ON -DNETCDF_DIR=$ENV{NETCDF_DIR})
+endif()
+
+if(NOT "$ENV{NETCDF_FORTRAN_DIR}" STREQUAL "")
+  list(APPEND extra_args -DWITH_NETCDF=ON -DNetCDF_Fortran_PATH=$ENV{NETCDF_FORTRAN_DIR})
+endif()
+
+if(PNetCDF_ROOT)
+  list(APPEND extra_args -DWITH_PNETCDF=ON -DPNETCDF_DIR=${PNetCDF_ROOT})
+elseif(NOT "$ENV{PNETCDF_DIR}" STREQUAL "")
+  list(APPEND extra_args -DWITH_PNETCDF=ON -DPNETCDF_DIR=$ENV{PNETCDF_DIR})
+endif()
+
+ExternalProject_Add(pio
+  DEPENDS ${ADIOS2_DEP}
+  GIT_REPOSITORY https://github.com/E3SM-Project/ParallelIO.git
+  GIT_TAG adios2_support
+  GIT_SHALLOW ON
+  PREFIX .
+  DOWNLOAD_DIR download
+  STAMP_DIR stamp
+  SOURCE_DIR source
+  BINARY_DIR build
+  INSTALL_DIR install
+  CMAKE_ARGS
+    -DCMAKE_C_COMPILER=${MPI_C_COMPILER}
+    -DCMAKE_CXX_COMPILER=${MPI_CXX_COMPILER}
+    -DCMAKE_Fortran_COMPILER=${MPI_Fortran_COMPILER}
+    -DCMAKE_POLICY_DEFAULT_CMP0074=NEW
+    -DWITH_ADIOS2=ON
+    -DADIOS2_ROOT=${ADIOS2_ROOT}
+    -DPIO_ENABLE_EXAMPLES=OFF
+    ${extra_args}
+  INSTALL_COMMAND $(MAKE) tests
+)
+
+add_test(NAME adios2-pio-all-tests
+  COMMAND ${CMAKE_CTEST_COMMAND} -VV
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/build
+)
