@@ -23,4 +23,5 @@ set(ENV{CC}  gcc)
 set(ENV{CXX} g++)
 set(ENV{FC}  gfortran)
 
+list(APPEND CTEST_NOTES_FILES ${CMAKE_CURRENT_LIST_FILE})
 include(${CMAKE_CURRENT_LIST_DIR}/adios2_external-testing_common.cmake)

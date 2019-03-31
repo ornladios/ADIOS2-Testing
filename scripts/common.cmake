@@ -403,7 +403,7 @@ if(dashboard_do_update)
     if(ADIOS_CTEST_SUBMIT_NOTES)
       message("Submitting dashboard scripts as Notes")
       # Send the main script as a note while submitting the Update part
-      set(CTEST_NOTES_FILES
+      list(APPEND CTEST_NOTES_FILES
         "${CTEST_SCRIPT_DIRECTORY}/${CTEST_SCRIPT_NAME}"
         "${CMAKE_CURRENT_LIST_FILE}"
       )
