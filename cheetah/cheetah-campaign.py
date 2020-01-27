@@ -67,6 +67,10 @@ def get_sweeps(ref_params_d, n_writers):
         if 'bp4' in d['writer']['xmlfile'].values[0]:
             rc_dependency = {'reader': 'writer'}
         sweep_sep = p.Sweep(parameters = sweep_params, node_layout = {'summit':sep_node_layout}, rc_dependency=rc_dependency)
+        if 'insitumpi' in d['writer']['xmlfile'].values[0]:
+            sweep_sep.launch_mode='mpmd'
+        if 'ssc' in d['writer']['xmlfile'].values[0]:
+            sweep_sep.launch_mode='mpmd'
 
         sweep_shared = None
         if shared_node_layout:
