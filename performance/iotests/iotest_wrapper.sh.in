@@ -8,9 +8,9 @@ fi
 
 if [ $3 -eq 1 ]
 then
-  out_fname=write_perf.txt
+  out_fname=write_perf_$3.txt
 else
-  out_fname=read_perf.txt
+  out_fname=read_perf_$3.txt
 fi
 rm -f ${out_fname}
 
