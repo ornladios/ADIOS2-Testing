@@ -1,4 +1,4 @@
-#EFFIS code coupling scenarios with adios\_iotest utility.
+# EFFIS code coupling scenarios with adios\_iotest utility.
 Coupling scenarios:
 
 1. **XG** Bidirectional coupling between X and G. 
