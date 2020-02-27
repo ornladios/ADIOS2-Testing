@@ -1,0 +1,66 @@
+# Config file for Task 1 (X) in a pipeline
+#   - Compute for longer than task G
+#   - Read in variable   density     from G from  G_to_X.bp
+#   - Solve on density -> produce variable  field   
+#   - Write variable     field     to    X_to_G.bp
+
+# Config file for Task 2 (G) in a pipeline
+#   - Compute for shorter time than task X
+#   - Compute a little (interpolating for output to X)
+#   - Produce variable   density
+#   - Write variable     density     to     G_to_X.bp
+#   - Read in variables  field  from X from X_to_G.bp
+#   - Compute a little (interpolating input from X)
+
+
+group io_X_to_G
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  array   double  field       2    263243  32        X       YZ
+
+group  io_G_to_X
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  array   double  density     2    210943  32        X       YZ
+
+
+
+## XGC (X)
+## Task 1 actions
+app 1
+    # specify that number of steps depends on G's steps
+  steps   over G_to_X.bp
+
+    # Compute for longer than task G
+  sleep   1.0
+    #
+    # read from G (blocking read)
+    #
+  read  next  G_to_X.bp    io_G_to_X   -1
+    #  Solve on density produce variable 'field'
+  cond G_to_X.bp sleep   0.01
+    #
+    # write 'a' to G
+    #
+  cond G_to_X.bp write   X_to_G.bp    io_X_to_G
+
+
+## GENE (G)
+## Task 2 actions
+app 2
+     # Specify the number of output steps 
+     # This applies to the task which starts with writing. 
+     # Tasks that start with reading will process all steps from their producers
+  steps  3
+
+     # Compute for shorter time than task X
+  sleep   0.5
+     # Compute a little (interpolating for output to X)
+     # Produce variable 'density'
+  sleep 0.05
+     # Write variable     'density'    G_to_X.bp
+  write   G_to_X.bp    io_G_to_X   
+     # Read in variable 'field'  from X from X_to_G.bp (blocking read)
+  read  next   X_to_G.bp    io_X_to_G   -1 
+     # Compute a little (interpolating input from X)
+  cond X_to_G.bp sleep 0.05
+  
+

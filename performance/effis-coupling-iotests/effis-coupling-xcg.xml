@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<adios-config>
+
+    <!-- example engines 
+
+        <engine type="BP4"/>
+        <engine type="SST"/>
+        <engine type="InSituMPI"/>
+        <engine type="SSC">
+
+    -->
+
+    <!--===========================================
+           Configuration for X to C
+        ==========================================-->
+
+    <io name="io_X_to_C">
+        <engine type="BP4">
+            <!-- SST engine parameters -->
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <!-- BP4/SST engine parameters -->
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+
+    <!--=========================================
+           Configuration for G to C 
+        =========================================-->
+    
+    <io name="io_G_to_C">
+        <engine type="BP4">
+            <!-- SST engine parameters -->
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <!-- BP4/SST engine parameters -->
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+    <!--===========================================
+           Configuration for C to X
+        ==========================================-->
+
+    <io name="io_C_to_X">
+        <engine type="BP4">
+            <!-- SST engine parameters -->
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <!-- BP4/SST engine parameters -->
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+
+    <!--=========================================
+           Configuration for C to G 
+        =========================================-->
+    
+    <io name="io_C_to_G">
+        <engine type="BP4">
+            <!-- SST engine parameters -->
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <!-- BP4/SST engine parameters -->
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+
+
+</adios-config>

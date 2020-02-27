@@ -1,0 +1,107 @@
+# Config file for Task 1 (X) 
+#   - Compute for longer than task G
+#   - Read in variable   'density'     from C
+#   - Solve on density -> produce variable   'field' 
+#   - Write variable     'field'       to C
+
+# Config file for Task 2 (C) - central coupler
+#   - Read variable 'density' from G 
+#   - Compute (interpolating input from G)
+#   - Write variable 'density' to X
+#   - Read variable 'field' from X
+#   - Compute (interpolating input from X)
+#   - Write variable 'field' to G
+
+# Config file for Task 3 (G)
+#   - Compute for shorter time than task X
+#   - Produce variable   'density'
+#   - Write variable     'density'    to  C
+#   - Read in variables  'field'      from  C 
+
+
+group io_X_to_C
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  array   double  field       2    263243  32        X       YZ
+
+group  io_G_to_C
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  array   double  density     2    210943  32        X       YZ
+
+group  io_C_to_X
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  # array   double  I_density   2    210943  32        X       YZ
+  link group io_G_to_C density
+
+group  io_C_to_G
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  # array   double  I_field     2   263243   32        X       YZ
+  link group io_X_to_C field
+
+
+
+## XGC (X)
+## Task 1 actions
+app 1
+    # specify that number of steps depends on G's steps
+  steps   over C_to_X.bp
+
+    # Compute for longer than task G
+  sleep   1.0 
+    #
+    # read from C (blocking read)
+    #
+  read  next  C_to_X.bp    io_C_to_X   -1
+    #  Solve on density -> produce variable   field  
+  cond C_to_X.bp sleep   0.01
+    #
+    # write 'a' to C
+    #
+  cond C_to_X.bp write   X_to_C.bp    io_X_to_C
+
+
+
+## Coupler (C)
+## Task 2 actions
+app 2
+    # specify that number of steps depends on G's steps
+  steps   over G_to_C.bp
+    #
+    # read from G (blocking read)
+    #
+  read  next  G_to_C.bp    io_G_to_C   -1
+    #  interpolate density X -> produce variable   density
+  cond G_to_C.bp sleep   0.05
+    #
+    # write 'density' to X
+    #
+  cond G_to_C.bp write   C_to_X.bp    io_C_to_X
+    #
+    # read from X (blocking read)
+    #
+  cond G_to_C.bp read  next  X_to_C.bp    io_X_to_C   -1
+    #  interpolate field for G -> produce variable   field
+  cond G_to_C.bp sleep   0.05
+    #
+    # write 'field' to G
+    #
+  cond G_to_C.bp write   C_to_G.bp    io_C_to_G
+
+
+
+## GENE (G)
+## Task 3 actions
+app 3
+     # Specify the number of output steps 
+     # This applies to the task which starts with writing. 
+     # Tasks that start with reading will process all steps from their producers
+  steps  3
+
+     # Compute for shorter time than task X
+     # Produce variable   density
+  sleep   0.5
+     # Write variable     density    G_to_C.bp
+  write   G_to_C.bp    io_G_to_C   
+     # Read in variable  field  from C from C_to_G.bp (blocking read)
+  read  next   C_to_G.bp    io_C_to_G   -1 
+
+
