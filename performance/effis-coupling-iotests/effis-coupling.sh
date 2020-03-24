@@ -11,7 +11,7 @@ SETUP=$1
 N1=$2
 N2=$3
 N3=$4
-IOTEST=~/work/ADIOS2/build/bin/adios_iotest
+IOTEST=adios_iotest
 
 if [ "$SETUP" == "xg" ]; then
     CFG=effis-coupling-xg.txt 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <adios-config>
 
-    <!-- example engines 
+    <!-- example engines
 
         <engine type="BP4"/>
         <engine type="SST"/>
@@ -22,14 +22,17 @@
             <parameter key="QueueFullPolicy" value="Block"/>
             <!-- BP4/SST engine parameters -->
             <parameter key="OpenTimeoutSecs" value="10.0"/>
+            <!-- SSC engine parameters -->
+            <parameter key="RendezvousAppCount" value="2"/>
+            <parameter key="MaxStreamsPerApp" value="4"/>
         </engine>
     </io>
 
 
     <!--=========================================
-           Configuration for G to C 
+           Configuration for G to C
         =========================================-->
-    
+
     <io name="io_G_to_C">
         <engine type="BP4">
             <!-- SST engine parameters -->
@@ -38,6 +41,9 @@
             <parameter key="QueueFullPolicy" value="Block"/>
             <!-- BP4/SST engine parameters -->
             <parameter key="OpenTimeoutSecs" value="10.0"/>
+            <!-- SSC engine parameters -->
+            <parameter key="RendezvousAppCount" value="2"/>
+            <parameter key="MaxStreamsPerApp" value="4"/>
         </engine>
     </io>
 
@@ -53,14 +59,17 @@
             <parameter key="QueueFullPolicy" value="Block"/>
             <!-- BP4/SST engine parameters -->
             <parameter key="OpenTimeoutSecs" value="10.0"/>
+            <!-- SSC engine parameters -->
+            <parameter key="RendezvousAppCount" value="2"/>
+            <parameter key="MaxStreamsPerApp" value="4"/>
         </engine>
     </io>
 
 
     <!--=========================================
-           Configuration for C to G 
+           Configuration for C to G
         =========================================-->
-    
+
     <io name="io_C_to_G">
         <engine type="BP4">
             <!-- SST engine parameters -->
@@ -69,6 +78,9 @@
             <parameter key="QueueFullPolicy" value="Block"/>
             <!-- BP4/SST engine parameters -->
             <parameter key="OpenTimeoutSecs" value="10.0"/>
+            <!-- SSC engine parameters -->
+            <parameter key="RendezvousAppCount" value="2"/>
+            <parameter key="MaxStreamsPerApp" value="4"/>
         </engine>
     </io>
 
