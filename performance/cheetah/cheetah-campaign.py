@@ -118,7 +118,7 @@ class Adios_iotest(Campaign):
 
     # Setup your environment. Loading modules, setting the LD_LIBRARY_PATH etc.
     # Ensure this script is executable
-    app_config_scripts = {'local': 'env_setup.sh', 'theta': 'env_setup.sh', 'summit':'env_setup.sh'}
+    app_config_scripts = {'local': 'env_setup_local.sh', 'theta': 'env_setup.sh', 'summit':'env_setup.sh'}
 
     input_files = [
         'staging-perf-test-16MB-2to1.txt',
