@@ -18,4 +18,4 @@ find_package(MPI REQUIRED)
 
 add_subdirectory(adios2)
 
-add_subdirectory(iotests)
+add_subdirectory(e3sm-mmf)
