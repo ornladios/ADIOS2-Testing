@@ -1,4 +1,4 @@
-# staging-performance-tests
+# Synthetic staging-performance-tests
 
 ## To run Cheetah:
 
@@ -24,7 +24,7 @@ adios_iotest runs with modes (5):
    BP4   - write and read one after the other
    SST/TCP
    SST/RDMA
-   SSC
+   SSC       - MPMD mode reguired, use -f <appfile> option for jsrun
    InSituMPI - MPMD mode required, use -f <appfile> option for jsrun
 
 Input setup (6):
