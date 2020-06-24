@@ -19,7 +19,7 @@ input_files = [
 
 
 # Parameters
-writer_np               = [1,2,4,8]
+writer_np               = [2,4,8]
 reader_np_ratio         = [2]
 size_per_pe             = ['1MB', '16MB']
 engines                 = ['bp4', 'insitumpi']
@@ -45,6 +45,7 @@ def create_sweep_groups():
                     per_run_timeout     = per_experiment_timeout,
                     component_inputs    = {'writer': input_files},
                     run_repetitions     = run_repetitions,
+                    tau_profiling       = True,
                     parameter_groups    = None
                     )
 
@@ -61,7 +62,7 @@ def create_sweep_groups():
                     # no. of reader ranks == no. of writers / reader_ratio
                     r = n//r_ratio
                     
-                    config_fname = "staging-perf-test-{}-{}to1.txt".format(s,r)
+                    config_fname = "staging-perf-test-{}-{}to1.txt".format(s,r_ratio)
                     scaling = '-w'
                     adios_xml = 'staging-perf-test-{}.xml'.format(e)
                     post_hoc = True if 'bp4' in e else False
