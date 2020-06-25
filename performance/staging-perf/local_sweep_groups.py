@@ -4,17 +4,17 @@ from codar.cheetah.parameters import SweepGroup
 
 
 input_files = [
-    'staging-perf-test-16MB-2to1.txt',
-    'staging-perf-test-16MB-8to1.txt',
-    'staging-perf-test-1MB-2to1.txt',
-    'staging-perf-test-1MB-8to1.txt',
-    'staging-perf-test-512MB-2to1.txt',
-    'staging-perf-test-512MB-8to1.txt',
-    'staging-perf-test-bp4.xml',
-    'staging-perf-test-insitumpi.xml',
-    'staging-perf-test-ssc.xml',
-    'staging-perf-test-sst-rdma.xml',
-    'staging-perf-test-sst-tcp.xml'
+    'config-files/staging-perf-test-16MB-2to1.txt',
+    'config-files/staging-perf-test-16MB-8to1.txt',
+    'config-files/staging-perf-test-1MB-2to1.txt',
+    'config-files/staging-perf-test-1MB-8to1.txt',
+    'config-files/staging-perf-test-512MB-2to1.txt',
+    'config-files/staging-perf-test-512MB-8to1.txt',
+    'xml-files/staging-perf-test-bp4.xml',
+    'xml-files/staging-perf-test-insitumpi.xml',
+    'xml-files/staging-perf-test-ssc.xml',
+    'xml-files/staging-perf-test-sst-rdma.xml',
+    'xml-files/staging-perf-test-sst-tcp.xml'
 ]
 
 
