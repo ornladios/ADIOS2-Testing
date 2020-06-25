@@ -1,6 +1,26 @@
 from codar.savanna.machines import SummitNode
 
 
+#----------------------------------------------------------------------------#
+def summit_node_layouts(w, r):
+    """
+    Get the list of node layouts that you want to explore for Summit.
+    Returns 2 node layouts:
+        - separate nodes, with 32 writers and readers on each node
+        - colocated, with 32 writers and 4 readers on each node
+    Input args:
+    w - Name of the writer application
+    r - Name of the reader application
+    """
+
+    nl = []
+    nl.append( separate(32, 32, w, r))
+    nl.append( shared  (32, 4, w, r))
+
+    return nl
+
+
+#----------------------------------------------------------------------------#
 def shared(nw, nr, wn, rn):
     """
     Creates a shared node layout for Summit with nw writers/node and nr readers/node.
@@ -27,6 +47,7 @@ def shared(nw, nr, wn, rn):
     return [n]
 
 
+#----------------------------------------------------------------------------#
 def separate(nw, nr, wn, rn):
     """
     Create separate nodes on Summit for the writer and reader processes.

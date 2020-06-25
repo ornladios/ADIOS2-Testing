@@ -16,5 +16,5 @@ class Adios_iotest(Campaign):
     scheduler_options       = {'theta':  {'project':'', 'queue': 'batch'}, 'summit': {'project':'csc303'}}
     app_config_scripts      = {'local': 'env-setup/env_setup_local.sh', 'theta': 'env-setup/env_setup_theta.sh', 'summit':'env-setup/env_setup_summit.sh'}
 
-    sweeps = {'summit': summit_sg.create_sweep_groups(), 'local': local_sg.create_sweep_groups()}
+    sweeps = {'summit': summit_sg.sweep_groups, 'local': local_sg.sweep_groups}
 
