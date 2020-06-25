@@ -11,7 +11,7 @@ class Adios_iotest(Campaign):
     supported_machines      = ['local', 'theta', 'summit']
     kill_on_partial_failure = True
     run_dir_setup_script    = None
-    run_post_process_script = 'env-setup/cleanup.sh'
+    run_post_process_script = 'post-processing/cleanup.sh'
     umask                   = '027'
     scheduler_options       = {'theta':  {'project':'', 'queue': 'batch'}, 'summit': {'project':'csc303'}}
     app_config_scripts      = {'local': 'env-setup/env_setup_local.sh', 'theta': 'env-setup/env_setup_theta.sh', 'summit':'env-setup/env_setup_summit.sh'}
