@@ -1,0 +1,226 @@
+# Data is set up to be 1MB per process when running in weak-scaling mode
+# Reader must be run 1/8 of the size of the Writer code
+#   e.g 16 writers, 2 readers
+#   mpirun -n 16 /opt/adios2/bin/adios_iotest -a 1 -c staging-perf-test-1MB-8to1.txt -w -x staging-perf-test-bp4.xml -t -d 16
+#   mpirun -n 2  /opt/adios2/bin/adios_iotest -a 2 -c staging-perf-test-1MB-8to1.txt -w -x staging-perf-test-bp4.xml -t -d 2
+
+# Config file for Task 1 in a pipeline
+#   - compute (sleep)
+#   - Produce variables  a  b  c  d
+#   - Write variables    a  b  c  d    to    stream_T1.bp
+
+# Config file for Task 2 in a pipeline
+#   - Read in variables  from Task 1 from stream_T1.bp
+#     using a different decomposition
+#   - compute (sleep)
+#   - Write out data for the purpose of testing correctness
+
+group  io_T1
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+  array   double  a00          3     2     2     2      XYZ     1       1
+  array   double  b00          3     2     2     2      XYZ     1       1
+  array   double  c00          3     2     2     2      XYZ     1       1
+  array   double  d00          3     2     2     2      XYZ     1       1
+  array   double  a01          3     2     2     2      XYZ     1       1
+  array   double  b01          3     2     2     2      XYZ     1       1
+  array   double  c01          3     2     2     2      XYZ     1       1
+  array   double  d01          3     2     2     2      XYZ     1       1
+  array   double  a02          3     2     2     2      XYZ     1       1
+  array   double  b02          3     2     2     2      XYZ     1       1
+  array   double  c02          3     2     2     2      XYZ     1       1
+  array   double  d02          3     2     2     2      XYZ     1       1
+  array   double  a03          3     2     2     2      XYZ     1       1
+  array   double  b03          3     2     2     2      XYZ     1       1
+  array   double  c03          3     2     2     2      XYZ     1       1
+  array   double  d03          3     2     2     2      XYZ     1       1
+  array   double  a04          3     2     2     2      XYZ     1       1
+  array   double  b04          3     2     2     2      XYZ     1       1
+  array   double  c04          3     2     2     2      XYZ     1       1
+  array   double  d04          3     2     2     2      XYZ     1       1
+  array   double  a05          3     2     2     2      XYZ     1       1
+  array   double  b05          3     2     2     2      XYZ     1       1
+  array   double  c05          3     2     2     2      XYZ     1       1
+  array   double  d05          3     2     2     2      XYZ     1       1
+  array   double  a06          3     2     2     2      XYZ     1       1
+  array   double  b06          3     2     2     2      XYZ     1       1
+  array   double  c06          3     2     2     2      XYZ     1       1
+  array   double  d06          3     2     2     2      XYZ     1       1
+  array   double  a07          3     2     2     2      XYZ     1       1
+  array   double  b07          3     2     2     2      XYZ     1       1
+  array   double  c07          3     2     2     2      XYZ     1       1
+  array   double  d07          3     2     2     2      XYZ     1       1
+  array   double  a08          3     2     2     2      XYZ     1       1
+  array   double  b08          3     2     2     2      XYZ     1       1
+  array   double  c08          3     2     2     2      XYZ     1       1
+  array   double  d08          3     2     2     2      XYZ     1       1
+  array   double  a09          3     2     2     2      XYZ     1       1
+  array   double  b09          3     2     2     2      XYZ     1       1
+  array   double  c09          3     2     2     2      XYZ     1       1
+  array   double  d09          3     2     2     2      XYZ     1       1
+  array   double  a10          3     2     2     2      XYZ     1       1
+  array   double  b10          3     2     2     2      XYZ     1       1
+  array   double  c10          3     2     2     2      XYZ     1       1
+  array   double  d10          3     2     2     2      XYZ     1       1
+  array   double  a11          3     2     2     2      XYZ     1       1
+  array   double  b11          3     2     2     2      XYZ     1       1
+  array   double  c11          3     2     2     2      XYZ     1       1
+  array   double  d11          3     2     2     2      XYZ     1       1
+  array   double  a12          3     2     2     2      XYZ     1       1
+  array   double  b12          3     2     2     2      XYZ     1       1
+  array   double  c12          3     2     2     2      XYZ     1       1
+  array   double  d12          3     2     2     2      XYZ     1       1
+  array   double  a13          3     2     2     2      XYZ     1       1
+  array   double  b13          3     2     2     2      XYZ     1       1
+  array   double  c13          3     2     2     2      XYZ     1       1
+  array   double  d13          3     2     2     2      XYZ     1       1
+  array   double  a14          3     2     2     2      XYZ     1       1
+  array   double  b14          3     2     2     2      XYZ     1       1
+  array   double  c14          3     2     2     2      XYZ     1       1
+  array   double  d14          3     2     2     2      XYZ     1       1
+  array   double  a15          3     2     2     2      XYZ     1       1
+  array   double  b15          3     2     2     2      XYZ     1       1
+  array   double  c15          3     2     2     2      XYZ     1       1
+  array   double  d15          3     2     2     2      XYZ     1       1
+  array   double  a16          3     2     2     2      XYZ     1       1
+  array   double  b16          3     2     2     2      XYZ     1       1
+  array   double  c16          3     2     2     2      XYZ     1       1
+  array   double  d16          3     2     2     2      XYZ     1       1
+  array   double  a17          3     2     2     2      XYZ     1       1
+  array   double  b17          3     2     2     2      XYZ     1       1
+  array   double  c17          3     2     2     2      XYZ     1       1
+  array   double  d17          3     2     2     2      XYZ     1       1
+  array   double  a18          3     2     2     2      XYZ     1       1
+  array   double  b18          3     2     2     2      XYZ     1       1
+  array   double  c18          3     2     2     2      XYZ     1       1
+  array   double  d18          3     2     2     2      XYZ     1       1
+  array   double  a19          3     2     2     2      XYZ     1       1
+  array   double  b19          3     2     2     2      XYZ     1       1
+  array   double  c19          3     2     2     2      XYZ     1       1
+  array   double  d19          3     2     2     2      XYZ     1       1
+  array   double  a20          3     2     2     2      XYZ     1       1
+  array   double  b20          3     2     2     2      XYZ     1       1
+  array   double  c20          3     2     2     2      XYZ     1       1
+  array   double  d20          3     2     2     2      XYZ     1       1
+  array   double  a21          3     2     2     2      XYZ     1       1
+  array   double  b21          3     2     2     2      XYZ     1       1
+  array   double  c21          3     2     2     2      XYZ     1       1
+  array   double  d21          3     2     2     2      XYZ     1       1
+  array   double  a22          3     2     2     2      XYZ     1       1
+  array   double  b22          3     2     2     2      XYZ     1       1
+  array   double  c22          3     2     2     2      XYZ     1       1
+  array   double  d22          3     2     2     2      XYZ     1       1
+  array   double  a23          3     2     2     2      XYZ     1       1
+  array   double  b23          3     2     2     2      XYZ     1       1
+  array   double  c23          3     2     2     2      XYZ     1       1
+  array   double  d23          3     2     2     2      XYZ     1       1
+  array   double  a24          3     2     2     2      XYZ     1       1
+  array   double  b24          3     2     2     2      XYZ     1       1
+  array   double  c24          3     2     2     2      XYZ     1       1
+  array   double  d24          3     2     2     2      XYZ     1       1
+  array   double  a25          3     2     2     2      XYZ     1       1
+  array   double  b25          3     2     2     2      XYZ     1       1
+  array   double  c25          3     2     2     2      XYZ     1       1
+  array   double  d25          3     2     2     2      XYZ     1       1
+  array   double  a26          3     2     2     2      XYZ     1       1
+  array   double  b26          3     2     2     2      XYZ     1       1
+  array   double  c26          3     2     2     2      XYZ     1       1
+  array   double  d26          3     2     2     2      XYZ     1       1
+  array   double  a27          3     2     2     2      XYZ     1       1
+  array   double  b27          3     2     2     2      XYZ     1       1
+  array   double  c27          3     2     2     2      XYZ     1       1
+  array   double  d27          3     2     2     2      XYZ     1       1
+  array   double  a28          3     2     2     2      XYZ     1       1
+  array   double  b28          3     2     2     2      XYZ     1       1
+  array   double  c28          3     2     2     2      XYZ     1       1
+  array   double  d28          3     2     2     2      XYZ     1       1
+  array   double  a29          3     2     2     2      XYZ     1       1
+  array   double  b29          3     2     2     2      XYZ     1       1
+  array   double  c29          3     2     2     2      XYZ     1       1
+  array   double  d29          3     2     2     2      XYZ     1       1
+  array   double  a30          3     2     2     2      XYZ     1       1
+  array   double  b30          3     2     2     2      XYZ     1       1
+  array   double  c30          3     2     2     2      XYZ     1       1
+  array   double  d30          3     2     2     2      XYZ     1       1
+  array   double  a31          3     2     2     2      XYZ     1       1
+  array   double  b31          3     2     2     2      XYZ     1       1
+  array   double  c31          3     2     2     2      XYZ     1       1
+  array   double  d31          3     2     2     2      XYZ     1       1
+  array   double  a32          3     2     2     2      XYZ     1       1
+  array   double  b32          3     2     2     2      XYZ     1       1
+  array   double  c32          3     2     2     2      XYZ     1       1
+  array   double  d32          3     2     2     2      XYZ     1       1
+  array   double  a33          3     2     2     2      XYZ     1       1
+  array   double  b33          3     2     2     2      XYZ     1       1
+  array   double  c33          3     2     2     2      XYZ     1       1
+  array   double  d33          3     2     2     2      XYZ     1       1
+  array   double  a34          3     2     2     2      XYZ     1       1
+  array   double  b34          3     2     2     2      XYZ     1       1
+  array   double  c34          3     2     2     2      XYZ     1       1
+  array   double  d34          3     2     2     2      XYZ     1       1
+  array   double  a35          3     2     2     2      XYZ     1       1
+  array   double  b35          3     2     2     2      XYZ     1       1
+  array   double  c35          3     2     2     2      XYZ     1       1
+  array   double  d35          3     2     2     2      XYZ     1       1
+  array   double  a36          3     2     2     2      XYZ     1       1
+  array   double  b36          3     2     2     2      XYZ     1       1
+  array   double  c36          3     2     2     2      XYZ     1       1
+  array   double  d36          3     2     2     2      XYZ     1       1
+  array   double  a37          3     2     2     2      XYZ     1       1
+  array   double  b37          3     2     2     2      XYZ     1       1
+  array   double  c37          3     2     2     2      XYZ     1       1
+  array   double  d37          3     2     2     2      XYZ     1       1
+  array   double  a38          3     2     2     2      XYZ     1       1
+  array   double  b38          3     2     2     2      XYZ     1       1
+  array   double  c38          3     2     2     2      XYZ     1       1
+  array   double  d38          3     2     2     2      XYZ     1       1
+  array   double  a39          3     2     2     2      XYZ     1       1
+  array   double  b39          3     2     2     2      XYZ     1       1
+  array   double  c39          3     2     2     2      XYZ     1       1
+  array   double  d39          3     2     2     2      XYZ     1       1
+  array   double  a40          3     2     2     2      XYZ     1       1
+  array   double  b40          3     2     2     2      XYZ     1       1
+  array   double  c40          3     2     2     2      XYZ     1       1
+  array   double  d40          3     2     2     2      XYZ     1       1
+  array   double  a41          3     2     2     2      XYZ     1       1
+  array   double  b41          3     2     2     2      XYZ     1       1
+  array   double  c41          3     2     2     2      XYZ     1       1
+  array   double  d41          3     2     2     2      XYZ     1       1
+  array   double  a42          3     2     2     2      XYZ     1       1
+  array   double  b42          3     2     2     2      XYZ     1       1
+  array   double  c42          3     2     2     2      XYZ     1       1
+  array   double  d42          3     2     2     2      XYZ     1       1
+  array   double  a43          3     2     2     2      XYZ     1       1
+  array   double  b43          3     2     2     2      XYZ     1       1
+  array   double  c43          3     2     2     2      XYZ     1       1
+  array   double  d43          3     2     2     2      XYZ     1       1
+  array   double  a44          3     2     2     2      XYZ     1       1
+  array   double  b44          3     2     2     2      XYZ     1       1
+  array   double  c44          3     2     2     2      XYZ     1       1
+  array   double  d44          3     2     2     2      XYZ     1       1
+  array   double  a45          3     2     2     2      XYZ     1       1
+  array   double  b45          3     2     2     2      XYZ     1       1
+  array   double  c45          3     2     2     2      XYZ     1       1
+  array   double  d45          3     2     2     2      XYZ     1       1
+  array   double  a46          3     2     2     2      XYZ     1       1
+  array   double  b46          3     2     2     2      XYZ     1       1
+  array   double  c46          3     2     2     2      XYZ     1       1
+  array   double  d46          3     2     2     2      XYZ     1       1
+  array   double  a47          3     2     2     2      XYZ     1       1
+  array   double  b47          3     2     2     2      XYZ     1       1
+  array   double  c47          3     2     2     2      XYZ     1       1
+  array   double  d47          3     2     2     2      XYZ     1       1
+  array   double  a48          3     2     2     2      XYZ     1       1
+  array   double  b48          3     2     2     2      XYZ     1       1
+  array   double  c48          3     2     2     2      XYZ     1       1
+  array   double  d48          3     2     2     2      XYZ     1       1
+  array   double  a49          3     2     2     2      XYZ     1       1
+  array   double  b49          3     2     2     2      XYZ     1       1
+  array   double  c49          3     2     2     2      XYZ     1       1
+  array   double  d49          3     2     2     2      XYZ     1       1
+
+
+# Task 1 actions
+app 1
+  steps  1000
+    # write all of io_T1 into stream_T1.bp
+  write   stream_T1.bp    io_T1
