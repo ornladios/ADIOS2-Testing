@@ -20,7 +20,7 @@ def create_experiment(writer_nprocs, reader_nprocs, config_file, adios_xml_file,
             # Change the engine for the 'SimulationOutput' IO object in the adios xml file
             p.ParamADIOS2XML    ('writer', 'dump_trajectory', 'trj_dump_out', 'engine', [engine]),
             # Sweep over four values for the nprocs 
-            p.ParamRunner       ('reader', 'nprocs', [writer_nprocs]),
+            p.ParamRunner       ('reader', 'nprocs', [reader_nprocs]),
             p.ParamCmdLineOption   ('reader', 'app', '-a', [2]),
             p.ParamCmdLineOption   ('reader', 'app-config', '-c', [config_file]),
             p.ParamCmdLineOption   ('reader', 'adios-config', '-x', [adios_xml_file]),

@@ -46,7 +46,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np, engines, node_layout
                 sweep_obj = create_experiment (
                                 writer_nprocs           = n,
                                 reader_nprocs           = r,
-                                config_file             = config_file,
+                                config_file             = config_file[0],
                                 adios_xml_file          = adios_xml_file, 
                                 engine                  = e,
                                 writer_decomposition    = n,
