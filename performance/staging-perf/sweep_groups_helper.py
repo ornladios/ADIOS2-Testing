@@ -70,27 +70,11 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                     config_fname = "staging-perf-test-{}-{}to1.txt".format(s,r_ratio)
                     scaling = '-w'
                     adios_xml = 'staging-perf-test-{}.xml'.format(e)
-                    post_hoc = True if 'bp4' in e else False
 
                     # Ugh. Need a better way to iterate over node layouts if it is not None
-                    if node_layouts:
-                        for nl in node_layouts:
+                    layouts = node_layouts or [None]
+                    for nl in layouts:
 
-                            # create a parameter sweep object for this parameter combination
-                            sweep_obj = create_experiment (
-                                            writer_nprocs           = n,
-                                            reader_nprocs           = r,
-                                            configFile              = config_fname,
-                                            scalingType             = scaling,
-                                            adios_xml_file          = adios_xml, 
-                                            writer_decomposition    = n,
-                                            reader_decomposition    = r,
-                                            machine_name            = machine_name,
-                                            node_layout             = nl,
-                                            post_hoc                = post_hoc
-                                            )
-                            sweep_objs.append(sweep_obj)
-                    else:
                         # create a parameter sweep object for this parameter combination
                         sweep_obj = create_experiment (
                                         writer_nprocs           = n,
@@ -101,11 +85,11 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                                         writer_decomposition    = n,
                                         reader_decomposition    = r,
                                         machine_name            = machine_name,
-                                        node_layout             = None,
-                                        post_hoc                = post_hoc
+                                        node_layout             = nl,
+                                        post_hoc                = False
                                         )
                         sweep_objs.append(sweep_obj)
-
+                    sweep_objs.append(sweep_obj)
         
             # we have created our sweep objects. Add them to the sweep group
             sg.parameter_groups = sweep_objs
