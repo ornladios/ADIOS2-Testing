@@ -89,7 +89,6 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                                         post_hoc                = False
                                         )
                         sweep_objs.append(sweep_obj)
-                    sweep_objs.append(sweep_obj)
         
             # we have created our sweep objects. Add them to the sweep group
             sg.parameter_groups = sweep_objs
