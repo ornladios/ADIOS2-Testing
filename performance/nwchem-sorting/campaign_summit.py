@@ -5,7 +5,7 @@ class Adios_iotest(Campaign):
 
     # Global campaign options
     name                    = "ADIOS_IOTEST_NWCHEM"
-    codes                   = [ ("writer", dict(exe="/ccs/home/xinliang/summit/utils/adios2/bin/adios2_iotest", adios_xml_file='copro.xml')), ("reader", dict(exe="/ccs/home/xinliang/summit/utils/adios2/bin/adios2_iotest", adios_xml_file='copro.xml')) ]
+    codes                   = [ ("writer", dict(exe="adios2_iotest", adios_xml_file='copro.xml')), ("reader", dict(exe="adios2_iotest", adios_xml_file='copro.xml')) ]
     supported_machines      = ['rhea', 'theta', 'summit']
     kill_on_partial_failure = True
     run_dir_setup_script    = None
