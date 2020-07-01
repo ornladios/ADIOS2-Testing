@@ -14,8 +14,8 @@ def summit_node_layouts(w, r):
     """
 
     nl = []
-    nl.append( separate(32, 32, w, r))
-    nl.append( shared  (32, 4, w, r))
+    nl.append( separate(20, 8, w, r))
+    nl.append( shared  (20, 2, w, r))
 
     return nl
 

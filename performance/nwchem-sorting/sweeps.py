@@ -32,8 +32,8 @@ def create_experiment(writer_nprocs, reader_nprocs, config_file, adios_xml_file,
     ]
 
     sweep = p.Sweep(parameters=params)
-    # if node_layout:
-    #     sweep.node_layout = {machine_name: node_layout}
+    if node_layout:
+        sweep.node_layout = {machine_name: node_layout}
 
     return sweep
 

@@ -41,20 +41,35 @@ def create_sweep_groups(machine_name, writer_np, reader_np, engines, node_layout
                 # if 'insitumpi' in e: sg.launch_mode = 'mpmd'
                 # Now lets create and add a list of sweep objects to this sweep group
                 sweep_objs = []
-                # TODO: add node_layout
                 # create a parameter sweep object for this parameter combination
-                sweep_obj = create_experiment (
-                                writer_nprocs           = n,
-                                reader_nprocs           = r,
-                                config_file             = config_file[0],
-                                adios_xml_file          = adios_xml_file, 
-                                engine                  = e,
-                                writer_decomposition    = n,
-                                reader_decomposition    = r,
-                                machine_name            = machine_name,
-                                node_layout             = None,
-                                )
-                sweep_objs.append(sweep_obj)
+                if node_layouts:
+                    for nl in node_layouts:
+                        # create a parameter sweep object for this parameter combination
+                        sweep_obj = create_experiment (
+                                        writer_nprocs           = n,
+                                        reader_nprocs           = r,
+                                        config_file             = config_file[0],
+                                        adios_xml_file          = adios_xml_file, 
+                                        engine                  = e,
+                                        writer_decomposition    = n,
+                                        reader_decomposition    = r,
+                                        machine_name            = machine_name,
+                                        node_layout             = nl,
+                                        )
+                        sweep_objs.append(sweep_obj)
+                else:
+                    sweep_obj = create_experiment (
+                                    writer_nprocs           = n,
+                                    reader_nprocs           = r,
+                                    config_file             = config_file[0],
+                                    adios_xml_file          = adios_xml_file, 
+                                    engine                  = e,
+                                    writer_decomposition    = n,
+                                    reader_decomposition    = r,
+                                    machine_name            = machine_name,
+                                    node_layout             = None,
+                                    )
+                    sweep_objs.append(sweep_obj)
 
             
                 # we have created our sweep objects. Add them to the sweep group
