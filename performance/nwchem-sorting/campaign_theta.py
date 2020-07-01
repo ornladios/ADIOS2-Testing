@@ -1,6 +1,5 @@
 from codar.cheetah import Campaign
-#import summit_sweep_groups as summit_sg
-import rhea_sweep_groups as rhea_sg
+import theta_sweep_groups as theta_sg
 
 class Adios_iotest(Campaign):
 
@@ -15,5 +14,5 @@ class Adios_iotest(Campaign):
     scheduler_options       = {'rhea': {'project':'csc143'}, 'theta':  {'project':'CSC250STDM11', 'queue': 'batch'}, 'summit': {'project':'csc303'}}
     app_config_scripts      = {'rhea': 'env-setup/env_setup_rhea.sh', 'theta': 'env-setup/env_setup_theta.sh', 'summit':'env-setup/env_setup_summit.sh'}
 
-    sweeps = {'rhea': rhea_sg.sweep_groups}
+    sweeps = {'theta': theta_sg.sweep_groups}
 

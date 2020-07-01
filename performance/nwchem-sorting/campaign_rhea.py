@@ -1,5 +1,4 @@
 from codar.cheetah import Campaign
-#import summit_sweep_groups as summit_sg
 import rhea_sweep_groups as rhea_sg
 
 class Adios_iotest(Campaign):

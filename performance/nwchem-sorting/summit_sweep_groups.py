@@ -14,7 +14,7 @@ per_experiment_timeout  = 100
 
 node_layouts = summit_node_layouts('writer', 'reader')
 
-sweep_groups = create_sweep_groups ('rhea',
+sweep_groups = create_sweep_groups ('summit',
                                     writer_np,
                                     reader_np,
                                     engines,
