@@ -10,7 +10,8 @@ run_repetitions         = 1
 batch_job_timeout_secs  = 600
 per_experiment_timeout  = 100
 
-node_layout = {'theta': [{'writer':20}, {'reader': 8}]}
+node_layouts = []
+node_layouts.append([{'writer':20}, {'reader': 8}])
 
 sweep_groups = create_sweep_groups ('theta',
                                     writer_np,
