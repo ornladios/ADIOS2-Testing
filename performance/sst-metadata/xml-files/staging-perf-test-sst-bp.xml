@@ -11,6 +11,7 @@
             <parameter key="QueueLimit" value="1"/>
             <parameter key="QueueFullPolicy" value="Block"/>
 	    <parameter key="MarshalMethod" value="BP"/>
+	    <parameter key="DataTransport" value="WAN"/>
         </engine>
     </io>
 
@@ -22,6 +23,7 @@
     
     <io name="io_T2_in">
         <engine type="SST">
+	    <parameter key="DataTransport" value="WAN"/>
         </engine>
     </io>
 

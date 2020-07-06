@@ -1,4 +1,11 @@
-# Synthetic staging-performance-tests
+# Synthetic SST writer-side metadata aggregation comparisons.   SST metadata
+  aggregation idffers between FFS and BP Marshalling principally in that BP
+  metadata aggregation performs its own MPI operations to aggregate, in
+  addition to the calls that SST must use for it's on synchronization
+  purposes.  This campaign aims to test the impact of that difference by
+  comparing writer-side data generation and marshalling *ONLY*.  That is,
+  data is not transmitted and we use ReaderRendezvousCount = 0 to ensure
+  that the writer doesn't wait for any readers.
 
 ## To run Cheetah:
 
@@ -20,44 +27,18 @@ cheetah generate-report \<campaign path\>
 
 10 jobs of different sized with 30 cases:
 
-adios_iotest runs with modes (5):
-   BP4   - write and read one after the other
-   SST/TCP
-   SST/RDMA
-   SSC       - MPMD mode reguired, use -f <appfile> option for jsrun
-   InSituMPI - MPMD mode required, use -f <appfile> option for jsrun
+adios_iotest runs with modes (2):
+   SST-ffs
+   SST-bp
 
 Input setup (6):
-  2x1: 1/2 readers
-  8x1: 1/8 readers
+   many-vars iotest input file has 200 variables in it, each small 3d arrays (2x2x2)
 
-  1MB per process
-  16MB
-  512MB
 
-Co-location (2):
-  Co-located - each 2 or 8 writer has 1 reader on the same node
-  Separated - readers are on separate nodes from writers
-
-Nodes (5):
-  co-location: 8 (test), 512, 1024, 2048, 4096
-  separate:    8+4,  512+256, 1024+512, 2048+1024,
+Nodes (9):
+  2, 4, 8, 32, 64, 128, 512, 2048, 8192
 
 Processes:
-  co-location:  32 writer + 16 or 4 readers per node
-  separate:     32 writer per node, 32 readers per node
-  8 nodes:
-     co-location:  256 writers    128/32 readers
-     separate:     256 writers    128/32 readers
-  512 nodes:
-     co-location:  16384 writers  8192/2048 readers
-     separate:     16384 writers  8192/2048 readers
-  1024 nodes:
-     co-location:  32768 writers  16384/4096 readers
-     separate:     32768 writers  16384/4096 readers
-  2048 nodes:
-     co-location:  65536 writers  32768/8192 readers
-     separate:     65536 writers  32768/8192 readers
-  4096 nodes:
-     co-location:  131072 writers  65536/16384 readers
+  32 writer per node
+
 
