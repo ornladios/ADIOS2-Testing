@@ -3,10 +3,25 @@ from codar.cheetah.parameters import SweepGroup
 
 
 input_files = [
-    'config-files/xgc-restart-test-write.txt',
-    'config-files/xgc-restart.f0-test-write.txt',
-    'config-files/xgc-restart-test-read.txt',
-    'config-files/xgc-restart.f0-test-read.txt',
+    'config-files/xgc-restart-test-write-8nodes.txt',
+    'config-files/xgc-restart.f0-test-write-8nodes.txt',
+    'config-files/xgc-restart-test-read-8nodes.txt',
+    'config-files/xgc-restart.f0-test-read-8nodes.txt',
+    'xml-files/xgc-restart-test-bp4.xml'
+]
+
+input_files = [
+    'config-files/xgc-restart-test-write-1024nodes.txt',
+    'config-files/xgc-restart.f0-test-write-1024nodes.txt',
+    'config-files/xgc-restart-test-read-1024nodes.txt',
+    'config-files/xgc-restart.f0-test-read-1024nodes.txt',
+    'xml-files/xgc-restart-test-bp4.xml'
+]
+input_files = [
+    'config-files/xgc-restart-test-write-64nodes.txt',
+    'config-files/xgc-restart.f0-test-write-64nodes.txt',
+    'config-files/xgc-restart-test-read-64nodes.txt',
+    'config-files/xgc-restart.f0-test-read-64nodes.txt',
     'xml-files/xgc-restart-test-bp4.xml'
 ]
 
