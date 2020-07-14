@@ -11,19 +11,29 @@ input_files = [
 ]
 
 input_files = [
-    'config-files/xgc-restart-test-write-1024nodes.txt',
-    'config-files/xgc-restart.f0-test-write-1024nodes.txt',
-    'config-files/xgc-restart-test-read-1024nodes.txt',
-    'config-files/xgc-restart.f0-test-read-1024nodes.txt',
-    'xml-files/xgc-restart-test-bp4.xml'
-]
-input_files = [
     'config-files/xgc-restart-test-write-64nodes.txt',
     'config-files/xgc-restart.f0-test-write-64nodes.txt',
     'config-files/xgc-restart-test-read-64nodes.txt',
     'config-files/xgc-restart.f0-test-read-64nodes.txt',
     'xml-files/xgc-restart-test-bp4.xml'
 ]
+
+input_files = [
+    'config-files/xgc-restart-test-write-256nodes.txt',
+    'config-files/xgc-restart.f0-test-write-256nodes.txt',
+    'config-files/xgc-restart-test-read-256nodes.txt',
+    'config-files/xgc-restart.f0-test-read-256nodes.txt',
+    'xml-files/xgc-restart-test-bp4.xml'
+]
+
+input_files = [
+    'config-files/xgc-restart-test-write-1024nodes.txt',
+    'config-files/xgc-restart.f0-test-write-1024nodes.txt',
+    'config-files/xgc-restart-test-read-1024nodes.txt',
+    'config-files/xgc-restart.f0-test-read-1024nodes.txt',
+    'xml-files/xgc-restart-test-bp4.xml'
+]
+
 
 
 def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, engines, node_layouts,

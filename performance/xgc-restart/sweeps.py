@@ -26,9 +26,8 @@ def create_experiment(writer_nprocs, reader_nprocs, configFile, scalingType, adi
             p.ParamCmdLineOption('reader', 'timing_info','-t',[None]),
             ]
 
-    rc_dependency = None
-    if post_hoc:
-        rc_dependency = {'reader': 'writer'}
+
+    rc_dependency = {'reader': 'writer'}
 
     sweep = p.Sweep(parameters=params, rc_dependency=rc_dependency)
     if node_layout:

@@ -3,7 +3,7 @@ from summit_node_layouts import summit_node_layouts
 
 
 # Parameters
-writer_np               = [48]
+writer_np               = [64, 256, 1024]
 reader_np_ratio         = [1]
 writers_per_node_summit = [6]
 size_per_pe             = []
