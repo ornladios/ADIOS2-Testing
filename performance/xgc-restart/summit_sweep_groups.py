@@ -3,12 +3,12 @@ from summit_node_layouts import summit_node_layouts
 
 
 # Parameters
-writer_np               = [64, 256, 1024]
+writer_np               = [384, 1536, 6144]
 reader_np_ratio         = [1]
 writers_per_node_summit = [6]
-size_per_pe             = []
+size_per_pe             = ['1MB', '16MB', '512MB']
 engines                 = ['bp4']
-run_repetitions         = 1
+run_repetitions         = 2
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 600
 
