@@ -6,14 +6,15 @@ from summit_node_layouts import summit_node_layouts
 writer_np               = [384, 1536, 6144]
 reader_np_ratio         = [1]
 writers_per_node_summit = [6]
-size_per_pe             = ['1MB', '16MB', '512MB']
+size_per_pe             = []
 engines                 = ['bp4']
-run_repetitions         = 2
+run_repetitions         = 0
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 600
 
 
 node_layouts = summit_node_layouts('writer', 'reader')
+#node_layouts = summit_node_layouts('writer')
 
 sweep_groups = create_sweep_groups ('summit',
                                     writer_np,

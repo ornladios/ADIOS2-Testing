@@ -18,12 +18,12 @@ def create_experiment(writer_nprocs, reader_nprocs, configFile, scalingType, adi
             p.ParamCmdLineOption('writer', 'decomposition','-d',[writer_decomposition]),
             p.ParamCmdLineOption('writer', 'timing_info','-t',[None]),
     
-            p.ParamCmdLineOption('reader', 'appid', '-a', [2]),
-            p.ParamCmdLineOption('reader', 'configFile','-c', [configFile]),
-            p.ParamCmdLineOption('reader', 'scaling', scalingType, [None]),
-            p.ParamCmdLineOption('reader', 'adios_xml_file', '-x', [adios_xml_file]),
-            p.ParamCmdLineOption('reader', 'decomposition','-d',[reader_decomposition]),
-            p.ParamCmdLineOption('reader', 'timing_info','-t',[None]),
+          #  p.ParamCmdLineOption('reader', 'appid', '-a', [2]),
+          #  p.ParamCmdLineOption('reader', 'configFile','-c', [configFile]),
+          #  p.ParamCmdLineOption('reader', 'scaling', scalingType, [None]),
+          #  p.ParamCmdLineOption('reader', 'adios_xml_file', '-x', [adios_xml_file]),
+          #  p.ParamCmdLineOption('reader', 'decomposition','-d',[reader_decomposition]),
+          #  p.ParamCmdLineOption('reader', 'timing_info','-t',[None]),
             ]
 
     rc_dependency = None

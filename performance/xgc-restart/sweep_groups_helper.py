@@ -3,36 +3,13 @@ from codar.cheetah.parameters import SweepGroup
 
 
 input_files = [
-    'config-files/xgc-restart-test-write-8nodes.txt',
-    'config-files/xgc-restart.f0-test-write-8nodes.txt',
-    'config-files/xgc-restart-test-read-8nodes.txt',
-    'config-files/xgc-restart.f0-test-read-8nodes.txt',
+    'config-files/xgc-restart-test-write.txt',
+    'config-files/xgc-restart.f0-test-write.txt',
+    'config-files/xgc-restart-test-read.txt',
+    'config-files/xgc-restart.f0-test-read.txt',
     'xml-files/xgc-restart-test-bp4.xml'
 ]
 
-input_files = [
-    'config-files/xgc-restart-test-write-64nodes.txt',
-    'config-files/xgc-restart.f0-test-write-64nodes.txt',
-    'config-files/xgc-restart-test-read-64nodes.txt',
-    'config-files/xgc-restart.f0-test-read-64nodes.txt',
-    'xml-files/xgc-restart-test-bp4.xml'
-]
-
-input_files = [
-    'config-files/xgc-restart-test-write-256nodes.txt',
-    'config-files/xgc-restart.f0-test-write-256nodes.txt',
-    'config-files/xgc-restart-test-read-256nodes.txt',
-    'config-files/xgc-restart.f0-test-read-256nodes.txt',
-    'xml-files/xgc-restart-test-bp4.xml'
-]
-
-input_files = [
-    'config-files/xgc-restart-test-write-1024nodes.txt',
-    'config-files/xgc-restart.f0-test-write-1024nodes.txt',
-    'config-files/xgc-restart-test-read-1024nodes.txt',
-    'config-files/xgc-restart.f0-test-read-1024nodes.txt',
-    'xml-files/xgc-restart-test-bp4.xml'
-]
 
 
 
@@ -77,38 +54,54 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
             if 'insitumpi' in e: sg.launch_mode = 'mpmd'
 
             # Now lets create and add a list of sweep objects to this sweep group
-            sweep_objs = []
+            sweep_objs = list()
 
-            # Sweep over data size per process, engines, and the readers_ratio
-            for s in size_per_pe:
-                for r_ratio in reader_np_ratio:
-        
-                    # no. of reader ranks == no. of writers / reader_ratio
-                    r = n//r_ratio
+            scaling = '-w'
+            adios_xml = "xgc-restart-test-bp4.xml"
+            for config_fname in ['xgc-restart-test-write.txt', 'xgc-restart.f0-test-write.txt', 'xgc-restart-test-read.txt', 'xgc-restart.f0-test-read.txt']:
+                # Ugh. Need a better way to iterate over node layouts if it is not None
+                layouts = node_layouts or [None]
+
+
+                for nl in layouts:
+                    # create a parameter sweep object for this parameter combination
+                    sweep_obj = create_experiment (
+                                            writer_nprocs           = n,
+                                            reader_nprocs           = n,
+                                            configFile              = config_fname,
+                                            scalingType             = scaling,
+                                            adios_xml_file          = adios_xml,
+                                            writer_decomposition    = n,
+                                            reader_decomposition    = n,
+                                            machine_name            = machine_name,
+                                            node_layout             = nl,
+                                            post_hoc                = False
+                                            )
+                    sweep_objs.append(sweep_obj)
+            #for config_fname in ['xgc-restart-test-read.txt', 'xgc-restart.f0-test-read.txt']:
+            #        # Ugh. Need a better way to iterate over node layouts if it is not None
+            #    layouts = node_layouts or [None]
+            #    for nl in layouts:
+                            # create a parameter sweep object for this parameter combination
+            #        sweep_obj = create_experiment(
+            #            writer_nprocs=0,
+            #            reader_nprocs=n,
+            #            configFile=config_fname,
+            #            scalingType=scaling,
+            #            adios_xml_file=adios_xml,
+            #            writer_decomposition=0,
+            #            reader_decomposition=n,
+            #            machine_name=machine_name,
+            #            node_layout=nl,
+            #            post_hoc=False
+            #        )
                     
-                    config_fname = "staging-perf-test-{}-{}to1.txt".format(s,r_ratio)
-                    scaling = '-w'
-                    adios_xml = 'staging-perf-test-{}.xml'.format(e)
+                    
+                    
+                    
+            #sweep_objs.append(sweep_obj)
 
-                    # Ugh. Need a better way to iterate over node layouts if it is not None
-                    layouts = node_layouts or [None]
-                    for nl in layouts:
 
-                        # create a parameter sweep object for this parameter combination
-                        sweep_obj = create_experiment (
-                                        writer_nprocs           = n,
-                                        reader_nprocs           = r,
-                                        configFile              = config_fname,
-                                        scalingType             = scaling,
-                                        adios_xml_file          = adios_xml, 
-                                        writer_decomposition    = n,
-                                        reader_decomposition    = r,
-                                        machine_name            = machine_name,
-                                        node_layout             = nl,
-                                        post_hoc                = False
-                                        )
-                        sweep_objs.append(sweep_obj)
-        
             # we have created our sweep objects. Add them to the sweep group
             sg.parameter_groups = sweep_objs
 

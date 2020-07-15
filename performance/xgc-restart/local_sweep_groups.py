@@ -2,11 +2,11 @@ from sweep_groups_helper import create_sweep_groups
 
 
 # Parameters
-writer_np               = [4]
-reader_np_ratio         = [2]
-size_per_pe             = ['1MB', '16MB']
+writer_np               = [4,8]
+reader_np_ratio         = [1]
+size_per_pe             = []
 engines                 = ['bp4']
-run_repetitions         = 2
+run_repetitions         = 0
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 600
 
