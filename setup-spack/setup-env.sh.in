@@ -15,3 +15,7 @@ else
     echo "ERROR: ${ADIOS2_TESTSUITE_DIR}/spack not found"
 fi
 
+spack load adios2
+spack load tau
+spack load codar-cheetah
+

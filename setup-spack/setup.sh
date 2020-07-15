@@ -115,7 +115,7 @@ spack find tau 2>&1 > /dev/null
 EX=$?
 if [ "$EX" -ne "0" ]; then
     echo "${_PREFIX}Build package TAU"
-    spack install tau
+    spack install tau+mpi
 else
     echo "${_PREFIX}TAU already built"
 fi

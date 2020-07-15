@@ -4,7 +4,7 @@
 
 $ cd /ccs/proj/csc303
 $ . ./adios2-test-suite/summit/setup-env.sh 
-$ spack load adios2 codar-cheetah
+Note: this will  spack load adios2 tau codar-cheetah
 $ cd ADIOS2-Testing/performance/staging-perf/
 $ ln -s `which adios2_iotest`
 $ export PYTHONPATH=$PWD:$PYTHONPATH
