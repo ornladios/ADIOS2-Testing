@@ -1,0 +1,23 @@
+packages:
+
+  # concretization preferences
+  all:
+    compiler: [#COMPILER#]
+    providers:
+      mpi: [#MPI_PACKAGE#]
+
+  #MPI_PACKAGE#:
+    paths:
+      #MPI_PACKAGE#: #MPI_PATH#
+    buildable: false
+
+  cmake:
+    paths:
+      cmake: #CMAKE_PATH#
+    buildable: false
+
+  python:
+    paths:
+      python: #PYTHON_PATH#
+    buildable: False
+
