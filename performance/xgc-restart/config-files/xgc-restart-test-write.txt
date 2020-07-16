@@ -37,15 +37,15 @@
 group  io_T1
   # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
 
-array  int  egid          1  66443645397     X
-array  int  enum_arr      1  6144            X
-array  int  eoff_arr      1  6144            X
-array  double   ephase        2  66443645397 9   X YZ
-array  int  igid          1  68547931040     X
-array  int  inum_arr      1  6144            X
-array  int  ioff_arr      1  6144            X
-array  double   iphase        2  68547931040 9   X YZ
-array  double   sheath_pot    2  1 499           X YZ
+array  int  egid              1  10814411     X
+array  int  enum_arr          1  1            X
+array  int  eoff_arr          1  1            X
+array  double   ephase        2  10814411 9   X YZ
+array  int  igid              1  11156884     X
+array  int  inum_arr          1  1            X
+array  int  ioff_arr          1  1            X
+array  double   iphase        2  11156884 9   X YZ
+array  double   sheath_pot    2  1 499        X YZ
 
 # Task 1 actions
 app 1
