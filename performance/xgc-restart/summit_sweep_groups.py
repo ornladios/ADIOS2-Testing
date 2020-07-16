@@ -14,7 +14,6 @@ per_experiment_timeout  = 600
 
 
 node_layouts = summit_node_layouts('writer', 'reader')
-#node_layouts = summit_node_layouts('writer')
 
 sweep_groups = create_sweep_groups ('summit',
                                     writer_np,

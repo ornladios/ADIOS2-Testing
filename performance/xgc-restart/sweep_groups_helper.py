@@ -46,23 +46,17 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                     per_run_timeout     = per_experiment_timeout,
                     component_inputs    = {'writer': input_files},
                     run_repetitions     = run_repetitions,
-                    tau_profiling       = True,
+                    tau_profiling       = False,
                     parameter_groups    = None
                     )
 
-            # Set launch mode to mpmd for insitumpi runs
-            if 'insitumpi' in e: sg.launch_mode = 'mpmd'
-
             # Now lets create and add a list of sweep objects to this sweep group
             sweep_objs = list()
-
             scaling = '-w'
             adios_xml = "xgc-restart-test-bp4.xml"
-            for config_fname in ['xgc-restart-test-write.txt', 'xgc-restart.f0-test-write.txt', 'xgc-restart-test-read.txt', 'xgc-restart.f0-test-read.txt']:
-                # Ugh. Need a better way to iterate over node layouts if it is not None
+            for config_fname in [['xgc-restart-test-write.txt', 'xgc-restart-test-read.txt']]:
+                #, ['xgc-restart.f0-test-write.txt', 'xgc-restart.f0-test-read.txt']
                 layouts = node_layouts or [None]
-
-
                 for nl in layouts:
                     # create a parameter sweep object for this parameter combination
                     sweep_obj = create_experiment (
@@ -75,32 +69,9 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                                             reader_decomposition    = n,
                                             machine_name            = machine_name,
                                             node_layout             = nl,
-                                            post_hoc                = False
+                                            post_hoc                = True
                                             )
                     sweep_objs.append(sweep_obj)
-            #for config_fname in ['xgc-restart-test-read.txt', 'xgc-restart.f0-test-read.txt']:
-            #        # Ugh. Need a better way to iterate over node layouts if it is not None
-            #    layouts = node_layouts or [None]
-            #    for nl in layouts:
-                            # create a parameter sweep object for this parameter combination
-            #        sweep_obj = create_experiment(
-            #            writer_nprocs=0,
-            #            reader_nprocs=n,
-            #            configFile=config_fname,
-            #            scalingType=scaling,
-            #            adios_xml_file=adios_xml,
-            #            writer_decomposition=0,
-            #            reader_decomposition=n,
-            #            machine_name=machine_name,
-            #            node_layout=nl,
-            #            post_hoc=False
-            #        )
-                    
-                    
-                    
-                    
-            #sweep_objs.append(sweep_obj)
-
 
             # we have created our sweep objects. Add them to the sweep group
             sg.parameter_groups = sweep_objs
