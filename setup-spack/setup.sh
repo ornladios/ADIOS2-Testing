@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 # Usage: setup.sh  INSTALL_DIR   HOSTNAME
-# Supported host names: summit  rhea  local
+# Supported host names: see directories in host-files/
+#   Automatically discovered names: summit rhea
 #
 
 _PREFIX="*** "
@@ -20,6 +21,7 @@ if [ -z $1 ]; then
 else
     INSTALL_DIR=$1
 fi
+mkdir -p $INSTALL_DIR
 cd $INSTALL_DIR
 INSTALL_DIR=$PWD
 cd -
@@ -46,10 +48,8 @@ echo "${_PREFIX}                        into directrory $INSTALL_DIR"
 # Source host specific environment (compilers, modules)
 #
 source ${BASE}/host-files/${HOST}/modules.sh
-module list 
 echo "${_PREFIX}Setup ADIOS2 test suite for compiler ${COMPILER}"
 
-mkdir -p ${INSTALL_DIR}/spack
 cd ${INSTALL_DIR}
 
 #
@@ -62,12 +62,6 @@ fi
 
 echo "${_PREFIX}Source ${INSTALL_DIR}/spack/share/spack/setup-env.sh"
 source ${INSTALL_DIR}/spack/share/spack/setup-env.sh
-
-#
-# SPACK compiler setup
-#
-echo "${_PREFIX}Setup compilers spack..."
-spack compiler add --scope site
 
 #
 # SPACK host-specific prebuilt packages
@@ -85,6 +79,11 @@ if [ -f ${BASE}/host-files/${HOST}/config.yaml ]; then
     cp ${BASE}/host-files/${HOST}/config.yaml ${INSTALL_DIR}/spack/etc/spack
 fi
 
+#
+# SPACK compiler setup
+#
+echo "${_PREFIX}Setup compilers spack..."
+spack compiler add --scope site
 
 #
 # Build required packages: adios2, codar-cheetah tau
