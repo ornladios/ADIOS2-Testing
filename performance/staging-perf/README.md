@@ -4,6 +4,8 @@
 
 Add the current directory to PYTHONPATH `export PYTHONPATH=$PWD:$PYTHONPATH`, so that Cheetah finds the current py files when it creates the campaign.
 
+In env-setup/env_setup_<machine>, set the LD_LIBRARY_PATH to point to the ADIOS2 library, or load the ADIOS2 module if available using 'module load adios2@<version>'.
+
 cheetah create-campaign -a \<path-to-exe-and-input-files\> -e \<path to spec file\> -m summit -o \<where to create campaign on gpfs\>
 
 Once the campaign is created, you will see path-to-campaign/your-username/ . Either run `run-all.sh` here to launch all jobs, or cd into one of the directories and launch `submit.sh`.
