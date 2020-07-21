@@ -19,3 +19,7 @@ spack load adios2
 spack load tau
 spack load codar-cheetah
 
+# Cheetah needs . in PYTHONPATH in case 
+# a campaign has external .py files to import
+export PYTHONPATH=.:$PYTHONPATH
+
