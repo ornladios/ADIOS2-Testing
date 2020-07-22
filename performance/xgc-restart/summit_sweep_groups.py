@@ -1,7 +1,7 @@
 from codar.savanna.machines import SummitNode
-from sweep_groups_helper import create_sweep_groups
-from summit_node_layouts import summit_node_layouts
 
+from summit_node_layouts import summit_node_layouts
+from sweep_groups_helper import create_sweep_groups
 
 # Parameters
 writer_np               = [384, 1536, 6144]
@@ -13,14 +13,13 @@ run_repetitions         = 0
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 600
 
-
 #node_layouts = summit_node_layouts('writer', 'reader')
-
-n = SummitNode()
-for i in range(writers_per_node_summit):
-    n.cpu[i] = "{}:{}".format("writer", i)
-    n.cpu[i + writers_per_node_summit] = "{}:{}".format("reader", i)
-node_layouts = list(n)
+#n = SummitNode()
+#for i in range(writers_per_node_summit[0]):
+#   n.cpu[i] = "{}:{}".format("writer", i)
+#    n.cpu[i + writers_per_node_summit[0]] = "{}:{}".format("reader", i)
+node_layouts = []
+node_layouts.append([ {'writer': writers_per_node_summit[0]}, {'reader': writers_per_node_summit[0]}])
 
 
 sweep_groups = create_sweep_groups ('summit',
