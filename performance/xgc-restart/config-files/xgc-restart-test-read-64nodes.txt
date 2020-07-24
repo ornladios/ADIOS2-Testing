@@ -1,0 +1,56 @@
+# Data mimic XGC restart files
+# Reader must be run 1/8 of the size of the Writer code
+
+# bpls -lav xgc.restart.00040.bp
+#File info:
+#  of variables:  26
+#  of attributes: 0
+#  statistics:    Min / Max 
+#
+#  int64_t  egid          {4152734013} = 1 / 4300800000
+#  int64_t  emaxgid       scalar = 4300800000
+#  int32_t  enphase       scalar = 9
+#  int32_t  enum          scalar = 11272212
+#  int32_t  enum_arr      {384} = 7650086 / 11384762
+#  int64_t  enum_total    scalar = 4152734013
+#  int64_t  eoff          scalar = 0
+#  int64_t  eoff_arr      {384} = 0 / 4145076801
+#  double   ephase        {4152734013, 9} = -251.909 / 1.85083e+16
+#  int64_t  igid          {4284243460} = 1 / 4300800000
+#  int64_t  imaxgid       scalar = 4300800000
+#  int32_t  inphase       scalar = 9
+#  int32_t  inum          scalar = 11251925
+#  int32_t  inum_arr      {384} = 9918456 / 11450415
+#  int64_t  inum_total    scalar = 4284243460
+#  int64_t  ioff          scalar = 0
+#  int64_t  ioff_arr      {384} = 0 / 4274318371
+#  double   iphase        {4284243460, 9} = -271.138 / 1.85499e+16
+#  int32_t  maxnum        scalar = 33600000
+#  int32_t  mype          scalar = 0
+#  int32_t  sheath_nphi   scalar = 1
+#  int32_t  sheath_nwall  scalar = 499
+#  double   sheath_pot    {1, 499} = 0 / 0
+#  double   time          scalar = 6.26277e-06
+#  int32_t  timestep      scalar = 40
+#  int32_t  totalpe       scalar = 384
+
+
+group  io_T1
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+
+array  int  egid              1  4152734013     X
+array  int  enum_arr          1  384            X
+array  int  eoff_arr          1  384            X
+array  double   ephase        2  4152734013  9  X YZ
+array  int  igid              1  4284243460     X
+array  int  inum_arr          1  384            X
+array  int  ioff_arr          1  384            X
+array  double   iphase        2  4284243460 9   X YZ
+array  double   sheath_pot    2  1 499          X YZ
+
+# Task 1 actions
+app 1
+    steps   over xgc.restart.00040.bp
+      # read
+        read  next  xgc.restart.00040.bp   io_T1  0.0
+
