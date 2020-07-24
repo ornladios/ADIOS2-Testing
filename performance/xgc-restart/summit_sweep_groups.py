@@ -1,7 +1,7 @@
 from codar.savanna.machines import SummitNode
 from sweep_groups_helper import create_sweep_groups
 
-# Parameters
+# Parameters 64, 256, 1024 nodes  6 processes per node
 writer_np               = [384, 1536, 6144]
 reader_np_ratio         = [1]
 writers_per_node_summit = [6]
