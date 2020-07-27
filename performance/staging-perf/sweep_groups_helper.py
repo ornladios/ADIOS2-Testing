@@ -50,7 +50,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                     per_run_timeout     = per_experiment_timeout,
                     component_inputs    = {'writer': input_files},
                     run_repetitions     = run_repetitions,
-                    tau_profiling       = True,
+                    tau_profiling       = False,
                     parameter_groups    = None
                     )
 
