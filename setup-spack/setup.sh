@@ -89,36 +89,65 @@ spack compiler add --scope site
 # Build required packages: adios2, codar-cheetah tau
 #
 
-echo "${_PREFIX}Looking for package ADIOS2..."
-spack find adios2 2>&1 > /dev/null
-EX=$?
-if [ "$EX" -ne "0" ]; then
-    echo "${_PREFIX}Build package ADIOS2 with HDF5"
-    spack install adios2@master+hdf5
+echo "${_PREFIX}Looking for ADIOS2 in the environment..."
+ADIOS2_PATH=`which adios2_iotest 2>/dev/null`
+if [ ! -z $ADIOS2_PATH ]; then
+    ADIOS2_PATH=`dirname $ADIOS2_PATH`
+    ADIOS2_PATH=`dirname $ADIOS2_PATH`
+    echo "${_PREFIX}Using Cheetah from" `dirname ${ADIOS2_PATH}`
+    SPACK_LOAD_ADIOS2=no
 else
-    echo "${_PREFIX}ADIOS2 already built"
+    echo "${_PREFIX}Looking for spack package ADIOS2..."
+    spack find adios2 2>&1 > /dev/null
+    EX=$?
+    if [ "$EX" -ne "0" ]; then
+        echo "${_PREFIX}Build spack package ADIOS2 with HDF5"
+        spack install adios2@master+hdf5
+    else
+        echo "${_PREFIX}ADIOS2 already built"
+    fi
+    SPACK_LOAD_ADIOS2=yes
 fi
 
-echo "${_PREFIX}Looking for package CODAR Cheetah..."
-spack find codar-cheetah 2>&1 > /dev/null
-EX=$?
-if [ "$EX" -ne "0" ]; then
-    echo "${_PREFIX}Build package CODAR Cheetah"
-    spack install codar-cheetah@develop
+echo "${_PREFIX}Looking for CHEETAH in the environment..."
+CHEETAH_PATH=`which cheetah 2>/dev/null`
+if [ ! -z $CHEETAH_PATH ]; then
+    CHEETAH_PATH=`dirname $CHEETAH_PATH`
+    CHEETAH_PATH=`dirname $CHEETAH_PATH`
+    echo "${_PREFIX}Using Cheetah from" `dirname ${CHEETAH_PATH}`
+    SPACK_LOAD_CHEETAH=no
 else
-    echo "${_PREFIX}CODAR Cheetah already built"
+    echo "${_PREFIX}Looking for spack package CODAR Cheetah..."
+    spack find codar-cheetah 2>&1 > /dev/null
+    EX=$?
+    if [ "$EX" -ne "0" ]; then
+        echo "${_PREFIX}Build spack package CODAR Cheetah"
+        spack install codar-cheetah@develop
+    else
+        echo "${_PREFIX}CODAR Cheetah already built"
+    fi
+    SPACK_LOAD_CHEETAH=yes
 fi
 
-echo "${_PREFIX}Looking for package TAU..."
-spack find tau 2>&1 > /dev/null
-EX=$?
-if [ "$EX" -ne "0" ]; then
-    echo "${_PREFIX}Build package TAU"
-    spack install tau+mpi
+echo "${_PREFIX}Looking for TAU in the environment..."
+TAU_PATH=`which tau_exec 2>/dev/null`
+if [ ! -z $TAU_PATH ]; then
+    TAU_PATH=`dirname $TAU_PATH`
+    TAU_PATH=`dirname $TAU_PATH`
+    echo "${_PREFIX}Using TAU from" `dirname ${TAU_PATH}`
+    SPACK_LOAD_TAU=no
 else
-    echo "${_PREFIX}TAU already built"
+    echo "${_PREFIX}Looking for spack package TAU..."
+    spack find tau 2>&1 > /dev/null
+    EX=$?
+    if [ "$EX" -ne "0" ]; then
+        echo "${_PREFIX}Build spack package TAU"
+        spack install tau+mpi
+    else
+        echo "${_PREFIX}TAU already built"
+    fi
+    SPACK_LOAD_TAU=yes
 fi
-
 
 
 #
@@ -133,6 +162,16 @@ cat ${BASE}/setup-env.sh.in | \
         -e "s/#BASE_DIR#/${BASE_DIR_SED}/g" \
         -e "s/#HOST#/${HOST}/g" \
     > ${INSTALL_DIR}/setup-env.sh
+
+if [ x"$SPACK_LOAD_ADIOS2" == x"yes" ]; then
+   echo "spack load adios2" >> ${INSTALL_DIR}/setup-env.sh
+fi
+if [ x"$SPACK_LOAD_CHEETAH" == x"yes" ]; then
+   echo "spack load codar-cheetah" >> ${INSTALL_DIR}/setup-env.sh
+fi
+if [ x"$SPACK_LOAD_TAU" == x"yes" ]; then
+   echo "spack load tau" >> ${INSTALL_DIR}/setup-env.sh
+fi
 
 #
 # Create modules.sh for setup-env.sh to source

@@ -15,7 +15,7 @@ packages:
   # use Summit-provided rdma-core
   rdma-core:
     paths:
-      rdma-core: /usr
+      rdma-core: /autofs/nccs-svm1_sw/summit/.swci/0-core/opt/spack/20180914/linux-rhel7-ppc64le/gcc-4.8.5/rdma-core-20-qymrwx6xzt6vmkzv4wj7kiars4cauvrk
     buildable: False
 
   openssl:
@@ -34,7 +34,10 @@ packages:
     buildable: False
 
   libfabric:
-    variants: fabrics=verbs
+    paths:
+      libfabric@1.10.1: /ccs/proj/csc303/adios2-test-suite/summit/libfabric/1.10.1.summit.gcc
+      #libfabric@1.7.0: /autofs/nccs-svm1_sw/summit/.swci/1-compute/opt/spack/20180914/linux-rhel7-ppc64le/gcc-8.1.1/libfabric-1.7.0-xkjxkthk7r5rheyhoapeygtoe23pqh7w
+    buildable: False
 
   # Auto generated with bin/spack-gen-external-packages.py
   # Auto generated with bin/spack-gen-external-packages.py
