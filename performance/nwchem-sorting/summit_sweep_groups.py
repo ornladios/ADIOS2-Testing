@@ -4,7 +4,11 @@ from create_sweep_groups import create_sweep_groups
 # Parameters
 writer_np               = [80]
 reader_np               = [8]
-engines                 = [ {'BP4':{'OpenTimeoutSecs':'30.0'}}, {'SST':{}}, {"Null":{}} ]
+engines                 = [ {'BP4':{'OpenTimeoutSecs':'30.0'}},
+                            {'SST':{'DataTransport':'RDMA'}},
+                            {"SSC":{}},
+                            {"Null":{}}
+                          ]
 adios_xml_file          = 'copro.xml'
 config_file             = ['copro-80.txt']
 run_repetitions         = 1

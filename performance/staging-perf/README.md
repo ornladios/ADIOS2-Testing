@@ -22,7 +22,7 @@ cheetah generate-report \<campaign path\>
 
 10 jobs of different sized with 30 cases:
 
-adios_iotest runs with modes (5):
+adios2_iotest runs with modes (5):
    BP4   - write and read one after the other
    SST/TCP
    SST/RDMA
