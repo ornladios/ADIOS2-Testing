@@ -9,7 +9,7 @@ input_files = [
 ]
 
 
-def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, engines, node_layouts,
+def create_sweep_groups(machine_name, writer_np, size_per_pe, engines, node_layouts,
         run_repetitions, batch_job_timeout_secs, per_experiment_timeout):
     """
     Create sweep groups for the input set of parameters.
@@ -19,7 +19,6 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
     Input args:
     machine_name:           Name of the target machine. local/summit/theta etc.
     writer_np:              List of values for the number of writer ranks
-    reader_np_ratio:        Ratio of the number of reader ranks to writer ranks
     size_per_pe:            Data size per process
     engines:                A List of ADIOS engines
     node_layouts:           A list of node layouts (on machines that support node layouts, otherwise None)
@@ -54,12 +53,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
 
             # Sweep over data size per process, engines, and the readers_ratio
             for s in size_per_pe:
-                for r_ratio in reader_np_ratio:
-        
-                    # no. of reader ranks == no. of writers / reader_ratio
-                    r = n//r_ratio
-                    
-                    config_fname = "staging-perf-test-{}.txt".format(s,r_ratio)
+                    config_fname = "staging-perf-test-{}.txt".format(s)
                     scaling = '-w'
                     adios_xml = 'staging-perf-test-{}.xml'.format(e)
                     post_hoc = True if 'bp4' in e else False
@@ -71,12 +65,10 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                             # create a parameter sweep object for this parameter combination
                             sweep_obj = create_experiment (
                                             writer_nprocs           = n,
-                                            reader_nprocs           = r,
                                             configFile              = config_fname,
                                             scalingType             = scaling,
                                             adios_xml_file          = adios_xml, 
                                             writer_decomposition    = n,
-                                            reader_decomposition    = r,
                                             machine_name            = machine_name,
                                             node_layout             = nl,
                                             post_hoc                = post_hoc
@@ -86,12 +78,10 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                         # create a parameter sweep object for this parameter combination
                         sweep_obj = create_experiment (
                                         writer_nprocs           = n,
-                                        reader_nprocs           = r,
                                         configFile              = config_fname,
                                         scalingType             = scaling,
                                         adios_xml_file          = adios_xml, 
                                         writer_decomposition    = n,
-                                        reader_decomposition    = r,
                                         machine_name            = machine_name,
                                         node_layout             = None,
                                         post_hoc                = post_hoc

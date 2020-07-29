@@ -9,7 +9,7 @@ class Adios_iotest(Campaign):
 
     # Global campaign options
     name                    = "ADIOS_IOTEST"
-    codes                   = [ ("writer", dict(exe="adios_iotest")), ("reader", dict(exe="adios_iotest")) ]
+    codes                   = [ ("writer", dict(exe="adios_iotest")) ]
     supported_machines      = ['local', 'theta', 'summit']
     kill_on_partial_failure = True
     run_dir_setup_script    = None
