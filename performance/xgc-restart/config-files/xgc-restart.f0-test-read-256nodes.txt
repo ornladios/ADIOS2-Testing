@@ -1,0 +1,59 @@
+# Data mimic XGC restart files
+# Reader must be run 1/8 of the size of the Writer code
+
+#File info:
+#  of variables:  26
+#  of attributes: 0
+#  statistics:    Min / Max 
+#
+#  double   e_f0_delta_T  {12458} = 0 / 0
+#  double   e_f0_delta_n  {12458} = 0 / 0
+#  double   e_f0_delta_u  {12458} = 0 / 0
+#  double   e_f0g         {32, 32, 12458, 31} = 0 / 0
+#  double   i_f0_delta_T  {12458} = 0 / 0
+#  double   i_f0_delta_n  {12458} = 0 / 0
+#  double   i_f0_delta_u  {12458} = 0 / 0
+#  double   i_f0g         {32, 32, 12458, 31} = 0 / 0
+#  int32_t  imu1          {1536} = 0 / 0
+#  int32_t  imu1m1        scalar = 0
+#  int32_t  imu2          {1536} = 31 / 31
+#  int32_t  inode1        {1536} = 1 / 12395
+#  int32_t  inode1m1      scalar = 0
+#  int32_t  inode2        {1536} = 902 / 12458
+#  int32_t  iphi          scalar = 0
+#  int32_t  mudata        scalar = 32
+#  int32_t  mype          scalar = 0
+#  int32_t  ndata         scalar = 902
+#  int32_t  ndata_arr     {1536} = 64 / 902
+#  int32_t  nmup1         scalar = 32
+#  int32_t  nnode         scalar = 12458
+#  int32_t  nphi          scalar = 32
+#  double   time          scalar = 6.26277e-06
+#  int32_t  timestep      scalar = 40
+#  int32_t  totalpe       scalar = 1536
+#  int32_t  vpdata        scalar = 31
+
+
+
+group  io_T1
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+
+array  double   e_f0_delta_T  1 12458            X
+array  double   e_f0_delta_n  1 12458            X
+array  double   e_f0_delta_u  1 12458            X
+array  double   e_f0g         4 32 32 12458 31   1 1 XYZV 1
+array  double   i_f0_delta_T  1 12458            X
+array  double   i_f0_delta_n  1 12458            X
+array  double   i_f0_delta_u  1 12458            X
+array  double   i_f0g         4 32 32 12458 31   1 1 XYZV 1
+array  int  imu1              1 1536             X
+array  int  imu2              1 1536             X
+array  int  inode1            1 1536             X
+array  int  inode2            1 1536             X
+array  int  ndata_arr         1 1536             X 
+
+# Task 1 actions
+app 1
+    steps   over xgc.restart.00040.bp
+      # read
+        read  next  xgc.restart.00040.bp   io_T1  0.0

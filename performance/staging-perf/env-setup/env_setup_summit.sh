@@ -1,5 +1,4 @@
 #!/bin/bash
 
-# Do we need to do something to set the environment? `module load` or `export PATH` or `export LD_LIBRARY_PATH`?
-module load tau
+source /ccs/proj/csc303/adios2-test-suite/summit/setup-env.sh
 
