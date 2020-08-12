@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 
 
 def get_total_time(stdout_file):
@@ -22,9 +23,9 @@ def get_total_time(stdout_file):
 
     # Parse lines to get the total runtime
     for line in lines:
-        if 'ADIOS IOTEST test time' in line:
+        if 'ADIOS IOTEST' in line:
             try:
-                total_time = line.split('ADIOS IOTEST test time ')[1].split('seconds')[0].strip()
+                total_time = re.findall("\d+\.\d+", line)[0]
             except Exception as e:
                 print("Warn: Could not parse line about total time. Skipping..")
                 print("ERROR: {}".format(e))
