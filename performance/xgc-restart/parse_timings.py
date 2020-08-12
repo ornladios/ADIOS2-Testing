@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import re
+import sys
 
 
 def get_total_time(stdout_file):
@@ -34,16 +35,23 @@ def get_total_time(stdout_file):
     return total_time
 
 
-if __name__ == "__main__":
-
+def parse_timings():
     d = {'writer_time_stdout': get_total_time('codar.workflow.stdout.writer'),
          'reader_time_stdout': get_total_time('codar.workflow.stdout.reader')}
-
     # Write data to 'cheetah_user_report.json'
+    rv = 0
     try:
         with open("cheetah_user_report.json", "w") as f:
             json.dump(d, f)
     except IOError:
         print("ERROR: Could not write times from stdout to cheetah_user_report.json.")
+        rv = 1
     except Exception as e:
         print("ERROR: {}".format(e))
+        rv = 1
+
+    return rv
+
+
+if __name__ == "__main__":
+    sys.exit(parse_timings())
