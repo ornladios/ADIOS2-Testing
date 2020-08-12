@@ -1,6 +1,6 @@
 from sweep_groups_helper import create_sweep_groups
-# Parameters 64, 256, 1024 nodes  16 processes per node
-writer_np               = [1024, 4096, 16384]
+# Parameters 8, 32, 128  nodes  16 processes per node
+writer_np               = [128, 512, 2048]
 reader_np_ratio         = [1]
 writers_per_node        = [16]
 size_per_pe             = []
