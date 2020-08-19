@@ -18,7 +18,7 @@ def get_total_time(stdout_file):
         with open(stdout_file) as f:
             lines = f.readlines()
     except IOError:
-        print("Warn: Could not find {}".format(stdout_file))
+        print("ERROR: Could not find {}".format(stdout_file))
     except Exception as e:
         print("ERROR: {}".format(e))
 
@@ -28,7 +28,7 @@ def get_total_time(stdout_file):
             try:
                 total_time = re.findall("\d+\.\d+", line)[0]
             except Exception as e:
-                print("Warn: Could not parse line about total time. Skipping..")
+                print("WARNING: Could not parse line about total time. Skipping..")
                 print("ERROR: {}".format(e))
 
     # Return the total runtime obtained from the stdout
