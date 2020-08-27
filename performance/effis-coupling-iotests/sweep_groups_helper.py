@@ -37,6 +37,7 @@ def create_sweep_groups(machine_name, x_np, g_np, c_np, engines, node_layouts,
     # sweep over writer processes
 
     if len(x_np) != len(g_np) or len(x_np) != len(c_np):
+        print(x_np, g_np, c_np)
         exit()
 
     for mode in ["xcg", "xg", "xgn"]:

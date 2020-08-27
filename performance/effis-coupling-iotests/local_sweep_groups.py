@@ -2,8 +2,9 @@ from sweep_groups_helper import create_sweep_groups
 
 
 # Parameters
-writer_np               = [2,4,8]
-reader_np_ratio         = [2]
+x_np                    = [4]
+g_np                    = [2]
+c_np                    = [2]
 size_per_pe             = ['1MB', '16MB']
 engines                 = ['bp4', 'insitumpi', 'sst-tcp', 'ssc']
 run_repetitions         = 1
@@ -12,9 +13,9 @@ per_experiment_timeout  = 550
 
 
 sweep_groups = create_sweep_groups ('local',
-                                    writer_np,
-                                    reader_np_ratio,
-                                    size_per_pe,
+                                    x_np,
+                                    g_np,
+                                    c_np,
                                     engines,
                                     None,  # node layout
                                     run_repetitions,
