@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "CTEST_FULL_OUTPUT"
+echo
+
+if [ $# -ne 1 ]
+then
+  echo "Usage: $0 /path/to/cheetah/rungroup/directory"
+  exit 1
+fi
+
+RGD="$1"
+RG=$(basename ${RGD})
+
+"@PROJECT_SOURCE_DIR@/common/env-exec.sh" "@ENV_SETUP@" \
+  cheetah status "@TEST_OUTPUT_DIR@" -u ${USER} -g ${RG} -not
+
+echo
+echo "----------------------------------------"
+echo "CDash Measurements"
+echo "----------------------------------------"
+echo
+
+"@PROJECT_SOURCE_DIR@/common/collect_json_for_ctest.py" "${RGD}"
+
+exit 0

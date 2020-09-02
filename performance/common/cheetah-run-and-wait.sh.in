@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function isdone {
+  echo
+  date +"%F %T.%N"
+  "@PROJECT_SOURCE_DIR@/common/env-exec.sh" "@ENV_SETUP@" \
+    cheetah status "@TEST_OUTPUT_DIR@" | \
+  awk -F ' : ' 'BEGIN{RET=0} {print; if(!($2 ~ /DONE/)) RET=1} END{exit RET}'
+}
+
+function failed {
+  "@PROJECT_SOURCE_DIR@/common/env-exec.sh" "@ENV_SETUP@" \
+    cheetah status "@TEST_OUTPUT_DIR@" | \
+  grep -q ' failed$'
+}
+
+function status_all() {
+  echo "Recieved USR1 signal"
+  echo "  Job status requested"
+  for S in @TEST_OUTPUT_DIR@/${USER}/*/status.sh
+  do
+    echo "$(basename $(dirname ${S})):"
+    ${S}
+  done
+}
+
+CANCELED=0
+function cancel_all() {
+  echo "Recieved HUP, TERM, or INT signal"
+  if [ ${CANCELED} -eq 1 ]
+  then
+    echo "  Forcibly aborting as this is not the first cancel request."
+    exit 2
+  fi
+  CANCELED=1
+
+  for C in @TEST_OUTPUT_DIR@/${USER}/*/cancel.sh
+  do
+    echo "  Canceling $(basename $(dirname ${C}))"
+    ${C}
+  done
+}
+
+trap status_all SIGUSR1
+trap cancel_all SIGHUP SIGTERM SIGINT
+
+"@TEST_OUTPUT_DIR@/${USER}/run-all.sh"
+
+until isdone
+do
+  sleep 10
+done
+
+if failed
+then
+  echo "WARNING: At least one of the jobs have failed"
+fi
+exit 0
