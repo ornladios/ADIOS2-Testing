@@ -5,10 +5,10 @@ from sweep_groups_helper import create_sweep_groups
 writer_np               = [2,4,8]
 reader_np_ratio         = [2]
 size_per_pe             = ['1MB', '16MB']
-engines                 = ['bp4', 'insitumpi']
+engines                 = ['bp4', 'insitumpi', 'sst-tcp', 'ssc']
 run_repetitions         = 2
 batch_job_timeout_secs  = 3600
-per_experiment_timeout  = 600
+per_experiment_timeout  = 550
 
 
 sweep_groups = create_sweep_groups ('local',

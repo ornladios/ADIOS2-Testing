@@ -40,7 +40,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
 
     sweep_groups = []
 
-    # sweep over writer processes 
+    # sweep over writer processes
     for n in writer_np:
         for e in engines:
             # Create a separate sweep group (batch job) for different values of writer nprocs
@@ -50,12 +50,13 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                     per_run_timeout     = per_experiment_timeout,
                     component_inputs    = {'writer': input_files},
                     run_repetitions     = run_repetitions,
-                    tau_profiling       = True,
+                    tau_profiling       = False,
                     parameter_groups    = None
                     )
 
-            # Set launch mode to mpmd for insitumpi runs
+            # Set launch mode to mpmd for insitumpi and ssc runs
             if 'insitumpi' in e: sg.launch_mode = 'mpmd'
+            if 'ssc' in e: sg.launch_mode = 'mpmd'
 
             # Now lets create and add a list of sweep objects to this sweep group
             sweep_objs = []
@@ -63,10 +64,10 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
             # Sweep over data size per process, engines, and the readers_ratio
             for s in size_per_pe:
                 for r_ratio in reader_np_ratio:
-        
+
                     # no. of reader ranks == no. of writers / reader_ratio
                     r = n//r_ratio
-                    
+
                     config_fname = "staging-perf-test-{}-{}to1.txt".format(s,r_ratio)
                     scaling = '-w'
                     adios_xml = 'staging-perf-test-{}.xml'.format(e)
@@ -81,7 +82,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                                         reader_nprocs           = r,
                                         configFile              = config_fname,
                                         scalingType             = scaling,
-                                        adios_xml_file          = adios_xml, 
+                                        adios_xml_file          = adios_xml,
                                         writer_decomposition    = n,
                                         reader_decomposition    = r,
                                         machine_name            = machine_name,
@@ -89,7 +90,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
                                         post_hoc                = False
                                         )
                         sweep_objs.append(sweep_obj)
-        
+
             # we have created our sweep objects. Add them to the sweep group
             sg.parameter_groups = sweep_objs
 

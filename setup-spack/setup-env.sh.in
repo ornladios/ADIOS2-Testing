@@ -1,0 +1,22 @@
+
+ADIOS2_TESTSUITE_DIR=#INSTALL_DIR#
+ADIOS2_TESTSUITE_HOST=#HOST#
+
+if [ -f ${ADIOS2_TESTSUITE_DIR}/modules-${ADIOS2_TESTSUITE_HOST}.sh ]; then
+    source $ADIOS2_TESTSUITE_DIR/modules-$ADIOS2_TESTSUITE_HOST.sh
+else
+    echo "ERROR: ${ADIOS2_TESTSUITE_DIR}/modules-${ADIOS2_TESTSUITE_HOST}.sh not found"
+fi
+    
+
+if [ -d ${ADIOS2_TESTSUITE_DIR}/spack ]; then
+    source ${ADIOS2_TESTSUITE_DIR}/spack/share/spack/setup-env.sh
+else
+    echo "ERROR: ${ADIOS2_TESTSUITE_DIR}/spack not found"
+fi
+
+# Cheetah needs . in PYTHONPATH in case 
+# a campaign has external .py files to import
+export PYTHONPATH=.:$PYTHONPATH
+
+# At the end will appear spack load xxx commands to load packages built with spack
