@@ -1,6 +1,6 @@
 from sweep_groups_helper import create_sweep_groups
-# Parameters 8, 32, 128  nodes  16 processes per node
-writer_np               = [128, 512, 2048]
+# Parameters 16 nodes of rhea
+writer_np               = [256]
 reader_np_ratio         = [1]
 writers_per_node        = [16]
 size_per_pe             = []
