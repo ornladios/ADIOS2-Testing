@@ -1,0 +1,13 @@
+source SCRIPT_DIR/env_build.sh
+module load tau
+
+# Workaround for rdma-core mismatch
+export LD_PRELOAD="/usr/lib64/libibverbs.so.1:/usr/lib64/librdmacm.so.1"
+
+export ADIOS2_ROOT=WORK_DIR/adios2/install
+export PATH=${ADIOS2_ROOT}/bin:${PATH}
+export LD_LIBRARY_PATH=${ADIOS2_ROOT}/lib64:${LD_LIBRARY_PATH}
+
+export CHEETAH_ROOT=WORK_DIR/cheetah
+export PATH=${CHEETAH_ROOT}/bin:${PATH}
+export PYTHONPATH=WORK_DIR/cheetah:${PYTHONPATH}
