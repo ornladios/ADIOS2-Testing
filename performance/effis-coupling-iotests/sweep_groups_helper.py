@@ -6,9 +6,18 @@ input_files = [
     'config-files/effis-coupling-xcg.txt',
     'config-files/effis-coupling-xg.txt',
     'config-files/effis-coupling-xgn.txt',
-    'xml-files/effis-coupling-xcg.xml',
-    'xml-files/effis-coupling-xg.xml',
-    'xml-files/effis-coupling-xgn.xml'
+    'xml-files/effis-coupling-xcg-bp4.xml',
+    'xml-files/effis-coupling-xg-bp4.xml',
+    'xml-files/effis-coupling-xgn-bp4.xml',
+    'xml-files/effis-coupling-xcg-insitumpi.xml',
+    'xml-files/effis-coupling-xg-insitumpi.xml',
+    'xml-files/effis-coupling-xgn-insitumpi.xml',
+    'xml-files/effis-coupling-xcg-ssc.xml',
+    'xml-files/effis-coupling-xg-ssc.xml',
+    'xml-files/effis-coupling-xgn-ssc.xml',
+    'xml-files/effis-coupling-xcg-sst-tcp.xml',
+    'xml-files/effis-coupling-xg-sst-tcp.xml',
+    'xml-files/effis-coupling-xgn-sst-tcp.xml'
 ]
 
 
@@ -67,7 +76,7 @@ def create_sweep_groups(machine_name, x_np, g_np, c_np, engines, node_layouts,
 
                 config_fname = "effis-coupling-{}.txt".format(mode)
                 scaling = '-w'
-                adios_xml = 'effis-coupling-{}.xml'.format(mode)
+                adios_xml = 'effis-coupling-{}-{}.xml'.format(mode,e)
 
                 # Ugh. Need a better way to iterate over node layouts if it is not None
                 layouts = node_layouts or [None]
