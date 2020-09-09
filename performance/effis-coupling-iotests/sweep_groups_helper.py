@@ -7,7 +7,7 @@ input_files = [
     'config-files/effis-coupling-xg.txt',
     'config-files/effis-coupling-xgn.txt',
     'xml-files/effis-coupling-xcg.xml',
-    'xml-files/effis-coupling-xg.xml'
+    'xml-files/effis-coupling-xg.xml',
     'xml-files/effis-coupling-xgn.xml'
 ]
 
