@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<adios-config>
+
+
+    <!--===========================================
+           Configuration for io_T1 group
+        ==========================================-->
+
+    <io name="io_X_to_G">
+        <engine type="SST">
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+
+    <!--=========================================
+           Configuration for io_T2_in group
+        =========================================-->
+
+    <io name="io_G_to_X">
+        <engine type="SST">
+            <parameter key="RendezvousReaderCount" value="1"/>
+            <parameter key="QueueLimit" value="1"/>
+            <parameter key="QueueFullPolicy" value="Block"/>
+            <parameter key="OpenTimeoutSecs" value="10.0"/>
+        </engine>
+    </io>
+
+
+</adios-config>

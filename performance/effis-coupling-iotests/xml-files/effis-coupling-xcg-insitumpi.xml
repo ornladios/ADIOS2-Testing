@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<adios-config>
+
+
+    <!--===========================================
+           Configuration for X to C
+        ==========================================-->
+
+    <io name="io_X_to_C">
+        <engine type="INSITUMPI">
+        </engine>
+    </io>
+
+
+    <!--=========================================
+           Configuration for G to C
+        =========================================-->
+
+    <io name="io_G_to_C">
+        <engine type="INSITUMPI">
+        </engine>
+    </io>
+
+
+    <!--===========================================
+           Configuration for C to X
+        ==========================================-->
+
+    <io name="io_C_to_X">
+        <engine type="INSITUMPI">
+        </engine>
+    </io>
+
+
+    <!--=========================================
+           Configuration for C to G
+        =========================================-->
+
+    <io name="io_C_to_G">
+        <engine type="INSITUMPI">
+        </engine>
+    </io>
+
+
+</adios-config>

@@ -1,11 +1,11 @@
-# Config file for Task 1 (X) 
+# Config file for Task 1 (X)
 #   - Compute for longer than task G
 #   - Read in variable   'density'     from C
-#   - Solve on density -> produce variable   'field' 
+#   - Solve on density -> produce variable   'field'
 #   - Write variable     'field'       to C
 
 # Config file for Task 2 (C) - central coupler
-#   - Read variable 'density' from G 
+#   - Read variable 'density' from G
 #   - Compute (interpolating input from G)
 #   - Write variable 'density' to X
 #   - Read variable 'field' from X
@@ -16,7 +16,7 @@
 #   - Compute for shorter time than task X
 #   - Produce variable   'density'
 #   - Write variable     'density'    to  C
-#   - Read in variables  'field'      from  C 
+#   - Read in variables  'field'      from  C
 
 
 group io_X_to_C
@@ -51,7 +51,7 @@ app 1
     # read from C (blocking read)
     #
   read  next  C_to_X.bp    io_C_to_X   -1
-    #  Solve on density -> produce variable   field  
+    #  Solve on density -> produce variable   field
   cond C_to_X.bp sleep   0.01
     #
     # write 'a' to C
@@ -91,8 +91,8 @@ app 2
 ## GENE (G)
 ## Task 3 actions
 app 3
-     # Specify the number of output steps 
-     # This applies to the task which starts with writing. 
+     # Specify the number of output steps
+     # This applies to the task which starts with writing.
      # Tasks that start with reading will process all steps from their producers
   steps  3
 
@@ -100,8 +100,8 @@ app 3
      # Produce variable   density
   sleep   0.5
      # Write variable     density    G_to_C.bp
-  write   G_to_C.bp    io_G_to_C   
+  write   G_to_C.bp    io_G_to_C
      # Read in variable  field  from C from C_to_G.bp (blocking read)
-  read  next   C_to_G.bp    io_C_to_G   -1 
+  read  next   C_to_G.bp    io_C_to_G   -1
 
 
