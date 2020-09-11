@@ -25,6 +25,7 @@ function(find_exec_in_env VAR EXE_NAME)
 endfunction()
 
 set(MACHINE "local" CACHE STRING "Use a pre-defined machine profile")
+set(SWEEP_GROUP "" CACHE STRING "The cheetah sweep group to use")
 set(ENV_SETUP "ENV_SETUP-NOTFOUND" CACHE FILEPATH "")
 mark_as_advanced(ENV_SETUP)
 set(TEST_OUTPUT_BASE_DIR
