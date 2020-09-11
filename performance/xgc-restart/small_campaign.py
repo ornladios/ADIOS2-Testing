@@ -1,7 +1,6 @@
 from codar.cheetah import Campaign
-import summit_sweep_groups as summit_sg
-import local_sweep_groups as local_sg
-import rhea_sweep_groups as rhea_sg
+import small_summit_sweep_groups as small_summit_sg
+import small_rhea_sweep_groups as small_rhea_sg
 
 
 class Adios_iotest(Campaign):
@@ -18,4 +17,6 @@ class Adios_iotest(Campaign):
     app_config_scripts = {'local': 'env-setup/env_setup_local.sh', 'theta': 'env-setup/env_setup_theta.sh',
                           'rhea': 'env-setup/env_setup_rhea.sh', 'summit': 'env-setup/env_setup_summit.sh'}
 
-    sweeps = {'summit': summit_sg.sweep_groups, 'rhea': rhea_sg.sweep_groups, 'local': local_sg.sweep_groups}
+
+    sweeps = {'summit': small_summit_sg.sweep_groups, 'rhea': small_rhea_sg.sweep_groups}
+
