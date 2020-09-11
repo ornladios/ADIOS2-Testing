@@ -11,7 +11,7 @@ per_experiment_timeout  = 600
 
 node_layouts = []
 node_layouts.append([ {'writer': writers_per_node[0]}, {'reader': writers_per_node[0]}])
-sweep_groups = create_sweep_groups ('smallrhea',
+sweep_groups = create_sweep_groups ('rhea',
                                     writer_np,
                                     reader_np_ratio,
                                     size_per_pe,

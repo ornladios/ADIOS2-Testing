@@ -18,7 +18,7 @@ for i in range(writers_per_node_summit[0]):
 
 node_layouts = [[n]]
 
-sweep_groups = create_sweep_groups ('smallsummit',
+sweep_groups = create_sweep_groups ('summit',
                                     writer_np,
                                     reader_np_ratio,
                                     size_per_pe,
