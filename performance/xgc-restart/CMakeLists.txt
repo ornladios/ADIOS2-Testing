@@ -60,7 +60,11 @@ execute_process(
       -m ${MACHINE}
       -o "${TEST_OUTPUT_DIR}"
   WORKING_DIRECTORY "${TEST_OUTPUT_DIR}"
+  RESULT_VARIABLE ret
 )
+if(NOT ret EQUAL 0)
+  message(FATAL_ERROR "Failed tog enerate Cheetah campaign")
+endif()
 
 # Submit / run the experiments as a build target
 add_custom_target(${TEST_PROFILE}-run-and-wait ALL

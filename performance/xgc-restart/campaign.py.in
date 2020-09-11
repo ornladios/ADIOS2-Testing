@@ -1,5 +1,12 @@
 from codar.cheetah import Campaign
-import @MACHINE@_sweep_groups as @MACHINE@_sg
+
+try:
+  import @MACHINE@_@SWEEP_GROUP@_sweep_groups as @MACHINE@_sg
+except ModuleNotFoundError:
+  try:
+      import @MACHINE@_medium_sweep_groups as @MACHINE@_sg
+  except ModuleNotFoundError:
+      import @MACHINE@_sweep_groups as @MACHINE@_sg
 
 
 class Adios_iotest(Campaign):
@@ -12,7 +19,10 @@ class Adios_iotest(Campaign):
     run_dir_setup_script    = None
     run_post_process_script = '@CMAKE_CURRENT_SOURCE_DIR@/post-processing/cleanup.sh'
     umask                   = '027'
-    scheduler_options       = {'theta':  {'project':'', 'queue': 'batch'}, 'rhea':  {'project':'csc143', 'queue': 'batch'}, 'summit': {'project':'csc303'}}
+    scheduler_options       = {
+        'theta':  {'project':'', 'queue': 'batch'},
+        'rhea':  {'project':'csc143', 'queue': 'batch'},
+        'summit': {'project':'csc303'}}
     app_config_scripts      = {'@MACHINE@': '@ENV_SETUP@'}
 
     sweeps = {'@MACHINE@': @MACHINE@_sg.sweep_groups}
