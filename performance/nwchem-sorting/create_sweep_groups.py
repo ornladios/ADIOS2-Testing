@@ -34,11 +34,16 @@ def create_sweep_groups(machine_name, writer_np, reader_np, engines, node_layout
                         per_run_timeout     = per_experiment_timeout,
                         component_inputs    = {'writer': config_file},
                         run_repetitions     = run_repetitions,
-                        tau_profiling       = True,
+                        tau_profiling       = False,
                         parameter_groups    = None
                         )
                 # Set launch mode to mpmd for insitumpi runs
                 # if 'insitumpi' in e: sg.launch_mode = 'mpmd'
+                for ek in e.keys(): 
+                    if ek.lower() == 'ssc':
+                        print("create_sweep_groups: Use MPMD mode for engine = {0}".format(ek))
+                        sg.launch_mode = 'mpmd'
+
                 # Now lets create and add a list of sweep objects to this sweep group
                 sweep_objs = []
                 # create a parameter sweep object for this parameter combination

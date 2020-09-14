@@ -10,6 +10,7 @@
             <parameter key="RendezvousReaderCount" value="1"/>
             <parameter key="QueueLimit" value="1"/>
             <parameter key="QueueFullPolicy" value="Block"/>
+            <parameter key="DataTransport" value="wan"/>
         </engine>
     </io>
 
@@ -21,6 +22,7 @@
     
     <io name="io_T2_in">
         <engine type="SST">
+            <parameter key="DataTransport" value="wan"/>
         </engine>
     </io>
 

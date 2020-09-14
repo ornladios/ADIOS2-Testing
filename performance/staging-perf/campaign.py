@@ -3,11 +3,11 @@ import summit_sweep_groups as summit_sg
 import local_sweep_groups as local_sg
 
 
-class Adios_iotest(Campaign):
+class Adios2_iotest(Campaign):
 
     # Global campaign options
-    name                    = "ADIOS_IOTEST"
-    codes                   = [ ("writer", dict(exe="adios_iotest")), ("reader", dict(exe="adios_iotest")) ]
+    name                    = "ADIOS2_IOTEST"
+    codes                   = [ ("writer", dict(exe="adios2_iotest")), ("reader", dict(exe="adios2_iotest")) ]
     supported_machines      = ['local', 'theta', 'summit']
     kill_on_partial_failure = True
     run_dir_setup_script    = None

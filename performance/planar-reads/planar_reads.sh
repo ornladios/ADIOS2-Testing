@@ -1,11 +1,26 @@
 #!/bin/bash
 
-APP1_N=$(awk '/app1/,/}/ {if ($0 ~ /nprocs/) print $NF}' codar.cheetah.run-params.json | sed 's/[,\"]//g')
+#####
+#
+# Builds a conf file for adios2_iotest. Parses the Cheetah run parameters to determine the
+#  data size and read pattern to use.
+#
+# Data domains are cubes (3D regular.)
+#
+#  possible read patterns are:
+#       ij - planar decomposition sliced along the fastest dimension
+#       ik - planar decomposition sliced along the middle dimension
+#       jk - planar decomposition sliced along the slowest dimension
+#       chunk - regular decomposition along all three dimensions
+#
+#####
+
+APP1_N=$(awk '/writer/,/}/ {if ($0 ~ /nprocs/) print $NF}' codar.cheetah.run-params.json | sed 's/[,\"]//g')
 APP1_X=1
 while [ $((APP1_X * APP1_X * APP1_X)) -lt $APP1_N ] ; do
     APP1_X=$((APP1_X + 1))
 done
-APP2_N=$(awk '/app2/,/}/ {if ($0 ~ /nprocs/) print $NF}' codar.cheetah.run-params.json | sed 's/[,\"]//g')
+APP2_N=$(awk '/reader/,/}/ {if ($0 ~ /nprocs/) print $NF}' codar.cheetah.run-params.json | sed 's/[,\"]//g')
 READ_PATTERN=$(awk '/read pattern/ { print $NF }' codar.cheetah.run-params.json | sed 's/[,\"]//g')
 if [ "${READ_PATTERN}" == "chunk" ] ; then
     APP2_X=1
@@ -14,10 +29,10 @@ if [ "${READ_PATTERN}" == "chunk" ] ; then
     done
     CHUNK2_LEN=$((CUBE_LEN / APP2_X))
 fi
-CUBE_LEN=$(awk '/cube length/ { print $NF }' codar.cheetah.run-params.json | sed 's/[,\"]//g')
+CUBE_LEN=$(awk '/cube_length/ { print $NF }' codar.cheetah.run-params.json | sed 's/[,\"]//g')
 
 CHUNK_LEN=$((CUBE_LEN / APP1_X))
-READ_PATTERN=$(awk '/read pattern/ { print $NF }' codar.cheetah.run-params.json | sed 's/[,\"]//g')
+READ_PATTERN=$(awk '/read_pattern/ { print $NF }' codar.cheetah.run-params.json | sed 's/[,\"]//g')
 
 echo "group  io_T1" > planar_reads.txt
 echo "
