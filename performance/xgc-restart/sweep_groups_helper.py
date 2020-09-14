@@ -5,7 +5,8 @@ from codar.cheetah.parameters import SweepGroup
 input_files = [
     'config-files/xgc-restart-test-write.txt',
     'config-files/xgc-restart-test-read.txt',
-    'xml-files/xgc-restart-test-bp4.xml'
+    'xml-files/xgc-restart-test-bp4.xml',
+    'xml-files/xgc-restart-test-hdf5.xml'
 ]
 
 
@@ -51,7 +52,10 @@ def create_sweep_groups(machine_name, writer_np, reader_np_ratio, size_per_pe, e
             # Now lets create and add a list of sweep objects to this sweep group
             sweep_objs = list()
             scaling = '-w'
-            adios_xml = "xgc-restart-test-bp4.xml"
+            if e == 'bp4':
+                adios_xml = "xgc-restart-test-bp4.xml"
+            elif e == 'hdf5':
+                adios_xml = "xgc-restart-test-hdf5.xml"
             for config_fname in [['xgc-restart-test-write.txt', 'xgc-restart-test-read.txt']]:
                 layouts = node_layouts or [None]
                 for nl in layouts:
