@@ -5,7 +5,7 @@ from sweep_groups_helper import create_sweep_groups
 writer_np               = [4,8]
 reader_np_ratio         = [1]
 size_per_pe             = []
-engines                 = ['bp4']
+engines                 = ['bp4', 'hdf5']
 run_repetitions         = 4
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 600

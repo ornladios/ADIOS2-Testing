@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<adios-config>
+
+
+    <!--===========================================
+           Configuration for io_T1 group
+        ==========================================-->
+
+    <io name="io_T1">
+        <engine type="HDF5">
+        </engine>
+    </io>
+
+
+</adios-config>
