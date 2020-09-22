@@ -120,7 +120,7 @@ then
   echo "Scheduling next run for \"${NEXTTIME}\"..."
   echo
   echo
-  echo ${THIS_SCRIPT} "$@" | at -M "${NEXTTIME}"
+  echo ${THIS_SCRIPT} \"$@\" | at -M "${NEXTTIME}"
 fi
 
 echo
