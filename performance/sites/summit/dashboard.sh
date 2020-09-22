@@ -129,13 +129,13 @@ echo "Running the dashboard..."
 echo
 echo
 
-export TAG=$(date +%Y%m%d)
+export TAG=$(date +%Y%m%d-%H%m%S)
 export PERF_SOURCE_DIR=$(readlink -f ${SCRIPT_DIR}/../..)
-export WORK_DIR=${PROJWORK}/csc303/${MACHINE}/${DT}/adios2-testing/${TAG}
+export WORK_DIR=${PROJWORK}/csc303/dashboard/adios2-testing/${BUILDNAME}-${TAG}
 
 mkdir -p ${WORK_DIR}
 sed -e "s|SCRIPT_DIR|${SCRIPT_DIR}|" -e "s|WORK_DIR|${WORK_DIR}|" ${SCRIPT_DIR}/env_run.sh.in > ${WORK_DIR}/env_run.sh
 
-${SCRIPT_DIR}/setup_adios2.sh
-${SCRIPT_DIR}/setup_cheetah.sh
-${SCRIPT_DIR}/run_testing.sh
+${SCRIPT_DIR}/setup_adios2.sh   &>${WORK_DIR}/log.txt
+${SCRIPT_DIR}/setup_cheetah.sh  &>>${WORK_DIR}/log.txt
+${SCRIPT_DIR}/run_testing.sh    &>>${WORK_DIR}/log.txt
