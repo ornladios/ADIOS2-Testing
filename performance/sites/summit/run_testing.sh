@@ -21,15 +21,21 @@ then
   rm -rf ${WORK_DIR}/performance
 fi
 mkdir -p ${WORK_DIR}/performance
-git clone https://github.com/ornladios/adios2-testing.git ${WORK_DIR}/performance/source
 
+SOURCE_DIR=$(readlink -f ${SCRIPT_DIR}/../..)
 mkdir -p ${WORK_DIR}/performance/build
 cd ${WORK_DIR}/performance/build
+
+if [ -z "${BUILDNAME}" ]
+then
+  BUILDNAME="${MACHINE}-adios2-xgc-restart-${SG}"
+fi
+
 cmake \
-  -DSITE=summit -DBUILDNAME=adios2-nightly \
-  -DMACHINE=summit -DSWEEP_GROUP=small \
+  -DSITE=olcf -DBUILDNAME="${BUILDNAME}" \
+  -DMACHINE=${MACHINE} -DSWEEP_GROUP=${SG} \
   -DENV_SETUP=${WORK_DIR}/env_run.sh \
   -DTEST_OUTPUT_BASE_DIR=${WORK_DIR}/performance/run \
-  ${WORK_DIR}/performance/source/performance
+  ${SOURCE_DIR}
 
-make VERBOSE=1 Nightly
+make VERBOSE=1 ${DT^}
