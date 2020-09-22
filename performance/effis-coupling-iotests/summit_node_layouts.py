@@ -2,7 +2,7 @@ from codar.savanna.machines import SummitNode
 
 
 #----------------------------------------------------------------------------#
-def summit_node_layouts(w, r):
+def summit_node_layouts(x, g, c):
     """
     Get the list of node layouts that you want to explore for Summit.
     Returns 2 node layouts:
@@ -14,62 +14,31 @@ def summit_node_layouts(w, r):
     """
 
     nl = []
-    nl.append( separate(32, 32, w, r))
-    nl.append( shared  (32, 4, w, r))
+    nl.append( separate(42, 42, 42, x, g, c))
 
     return nl
 
 
 #----------------------------------------------------------------------------#
-def shared(nw, nr, wn, rn):
-    """
-    Creates a shared node layout for Summit with nw writers/node and nr readers/node.
-    Spreads writer and reader ranks evenly across the 2 sockets.
+def separate(nx, ng, nc, x, g, c):
 
-    Input args:
-    nw = num writers
-    nr = num readers
-    wn = writer app name
-    rn = reader app name
-    """
+    node_x = SummitNode()
+    for i in range(nx//2):
+        node_x.cpu[i] = "{}:{}".format(x, i)
+    for i in range(nx//2):
+        node_x.cpu[i+21] = "{}:{}".format(x, i+nx//2)
 
-    n = SummitNode()
-    for i in range(nw//2):
-        n.cpu[i] = "{}:{}".format(wn, i)
-    for i in range(nw//2):
-        n.cpu[i+21] = "{}:{}".format(wn, i+nw//2)
+    node_g = SummitNode()
+    for i in range(ng//2):
+        node_g.cpu[i] = "{}:{}".format(g, i)
+    for i in range(ng//2):
+        node_g.cpu[i+21] = "{}:{}".format(g, i+ng//2)
 
-    for i in range(nr//2):
-        n.cpu[i+nw//2] = "{}:{}".format(rn, i)
-    for i in range(nr//2):
-        n.cpu[i+nw//2+21] = "{}:{}".format(rn, i+nr//2)
+    node_c = SummitNode()
+    for i in range(nc//2):
+        node_c.cpu[i] = "{}:{}".format(c, i)
+    for i in range(nc//2):
+        node_c.cpu[i+21] = "{}:{}".format(c, i+nc//2)
 
-    return [n]
-
-
-#----------------------------------------------------------------------------#
-def separate(nw, nr, wn, rn):
-    """
-    Create separate nodes on Summit for the writer and reader processes.
-    Spawns 32 writers/readers on each node, 16 on each socket
-    
-    Input args:
-    nw = num writers
-    nr = num readers
-    wn = writer app name
-    rn = reader app name
-    """
-    node_w = SummitNode()
-    for i in range(nw//2):
-        node_w.cpu[i] = "{}:{}".format(wn, i)
-    for i in range(nw//2):
-        node_w.cpu[i+21] = "{}:{}".format(wn, i+nw//2)
-
-    node_r = SummitNode()
-    for i in range(nr//2):
-        node_r.cpu[i] = "{}:{}".format(rn, i)
-    for i in range(nr//2):
-        node_r.cpu[i+21] = "{}:{}".format(rn, i+nr//2)
-
-    return [node_w, node_r]
+    return [node_x, node_g, node_c]
 
