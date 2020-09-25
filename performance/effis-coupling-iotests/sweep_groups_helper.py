@@ -75,7 +75,7 @@ def create_sweep_groups(machine_name, x_np, g_np, c_np, engines, node_layouts,
 
 
                 config_fname = "effis-coupling-{}.txt".format(mode)
-                scaling = '-w'
+                scaling = '-s'
                 adios_xml = 'effis-coupling-{}-{}.xml'.format(mode,e)
 
                 # Ugh. Need a better way to iterate over node layouts if it is not None
