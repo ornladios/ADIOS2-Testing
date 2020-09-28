@@ -17,7 +17,10 @@ input_files = [
     'xml-files/effis-coupling-xgn-ssc.xml',
     'xml-files/effis-coupling-xcg-sst-tcp.xml',
     'xml-files/effis-coupling-xg-sst-tcp.xml',
-    'xml-files/effis-coupling-xgn-sst-tcp.xml'
+    'xml-files/effis-coupling-xgn-sst-tcp.xml',
+    'xml-files/effis-coupling-xcg-sst-rdma.xml',
+    'xml-files/effis-coupling-xg-sst-rdma.xml',
+    'xml-files/effis-coupling-xgn-sst-rdma.xml'
 ]
 
 

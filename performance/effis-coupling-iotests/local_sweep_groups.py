@@ -6,7 +6,7 @@ x_np                    = [4]
 g_np                    = [2]
 c_np                    = [2]
 engines                 = ['bp4', 'insitumpi', 'sst-tcp', 'ssc']
-run_repetitions         = 1
+run_repetitions         = 0
 batch_job_timeout_secs  = 3600
 per_experiment_timeout  = 360
 

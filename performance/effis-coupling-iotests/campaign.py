@@ -13,7 +13,7 @@ class Adios2_iotest(Campaign):
     run_dir_setup_script    = None
     run_post_process_script = 'post-processing/cleanup.sh'
     umask                   = '027'
-    scheduler_options       = {'theta':  {'project':'', 'queue': 'batch'}, 'summit': {'project':'csc303'}}
+    scheduler_options       = {'theta':  {'project':'', 'queue': 'batch'}, 'summit': {'project':'csc143'}}
     app_config_scripts      = {'local': 'env-setup/env_setup_local.sh', 'theta': 'env-setup/env_setup_theta.sh', 'summit':'env-setup/env_setup_summit.sh'}
 
     sweeps = {'summit': summit_sg.sweep_groups, 'local': local_sg.sweep_groups}
