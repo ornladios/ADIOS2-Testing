@@ -94,7 +94,7 @@ app 3
      # Specify the number of output steps
      # This applies to the task which starts with writing.
      # Tasks that start with reading will process all steps from their producers
-  steps  3
+  steps  10
 
      # Compute for shorter time than task X
      # Produce variable   density
