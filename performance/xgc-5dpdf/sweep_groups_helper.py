@@ -21,7 +21,7 @@ def create_sweep_groups(machine_name, writer_np, reader_np, size_per_pe, engines
     Input args:
     machine_name:           Name of the target machine. local/summit etc.
     writer_np:              List of values for the number of writer ranks
-    reader_np:        Ratio of the number of reader ranks to writer ranks
+    reader_np:              List of values for the number of reader ranks
     size_per_pe:            Data size per process
     engines:                A List of ADIOS engines
     node_layouts:           A list of node layouts (on machines that support node layouts, otherwise None)
