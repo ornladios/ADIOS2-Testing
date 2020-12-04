@@ -1,0 +1,28 @@
+from codar.cheetah import Campaign
+
+try:
+  import @MACHINE@_@SWEEP_GROUP@_sweep_groups as @MACHINE@_sg
+except ModuleNotFoundError:
+  try:
+      import @MACHINE@_medium_sweep_groups as @MACHINE@_sg
+  except ModuleNotFoundError:
+      import @MACHINE@_sweep_groups as @MACHINE@_sg
+
+
+class Adios_iotest(Campaign):
+
+    # Global campaign options
+    name                    = "ADIOS_IOTEST"
+    codes                   = [ ("writer", dict(exe="adios2_iotest")), ("reader", dict(exe="adios2_iotest")) ]
+    supported_machines      = ['local', 'summit', 'rhea']
+    kill_on_partial_failure = True
+    run_dir_setup_script    = None
+    run_post_process_script = '@CMAKE_CURRENT_SOURCE_DIR@/post-processing/cleanup.sh'
+    umask                   = '027'
+    scheduler_options       = {
+        'rhea':  {'project':'csc143', 'queue': 'batch'},
+        'summit': {'project':'csc303'}}
+    app_config_scripts      = {'@MACHINE@': '@ENV_SETUP@'}
+
+    sweeps = {'@MACHINE@': @MACHINE@_sg.sweep_groups}
+

@@ -1,0 +1,72 @@
+# Data mimic XGC-5d-pdf coupling
+# Reader read 1/32th of the Writer data
+
+# bpls -lav xgc.restart.f0.00600.bp
+#  File info:
+#  of variables:  26
+#  of attributes: 0
+#  statistics:    Min / Max
+
+#  double   e_f0_delta_T  {1383675} = 0 / 0
+#  double   e_f0_delta_n  {1383675} = 0 / 0
+#  double   e_f0_delta_u  {1383675} = 0 / 0
+#  double   e_f0g         {16, 39, 1383675, 39} = -3.64202e+17 / 2.28918e+20
+#  double   i_f0_delta_T  {1383675} = 0 / 0
+#  double   i_f0_delta_n  {1383675} = 0 / 0
+#  double   i_f0_delta_u  {1383675} = 0 / 0
+#  double   i_f0g         {16, 39, 1383675, 39} = -5.3329e+16 / 2.67385e+19
+#  int32_t  imu1          {12288} = 0 / 0
+#  int32_t  imu1m1        scalar = 0
+#  int32_t  imu2          {12288} = 38 / 38
+#  int32_t  inode1        {12288} = 1 / 1383675
+#  int32_t  inode1m1      scalar = 0
+#  int32_t  inode2        {12288} = 1413 / 1383675
+#  int32_t  iphi          scalar = 0
+#  int32_t  mudata        scalar = 39
+#  int32_t  mype          scalar = 0
+#  int32_t  ndata         scalar = 1413
+#  int32_t  ndata_arr     {12288} = 1 / 10779
+#  int32_t  nmup1         scalar = 39
+#  int32_t  nnode         scalar = 1383675
+#  int32_t  nphi          scalar = 16
+#  double   time          scalar = 0.000178637
+#  int32_t  timestep      scalar = 600
+#  int32_t  totalpe       scalar = 12288
+#  int32_t  vpdata        scalar = 39
+###################################################################
+# Array values are changed in the IO_TEST to be divisible by 12288 processes
+group  io_T1
+  # item  type    varname     N   [dim1 dim2 ... dimN  decomp1 decomp2 ... decompN]
+
+array 	double   e_f0_delta_T  1	43008					XYZ
+array 	double   e_f0_delta_n  1	43008					XYZ
+array 	double   e_f0g         4	16	39	43008	39		1	1	XYZ	1
+array 	double   i_f0_delta_T  1	43008					XYZ
+array 	double   i_f0_delta_n  1	43008					XYZ
+array 	double   i_f0_delta_u  1	43008					XYZ
+array 	double   i_f0g         4	16	39	43008	39		1	1	XYZ	1
+array 	int      imu1          1	384						XYZ
+array 	int      imu1m1        1	1						XYZ
+array 	int      imu2          1	384						XYZ
+array 	int      inode1        1	384						XYZ
+array 	int      inode1m1      1	1						XYZ
+array 	int      inode2        1	384						XYZ
+array 	int      iphi          1	1						XYZ
+array 	int      mudata        1	1						XYZ
+array 	int      mype          1	1						XYZ
+array 	int      ndata         1	1						XYZ
+array 	int      ndata_arr     1	384						XYZ
+array 	int      nmup1         1	1						XYZ
+array 	int      nnode         1	1						XYZ
+array 	int      nphi          1	1						XYZ
+array 	double   time          1	1						XYZ
+array 	int      timestep      1	1						XYZ
+array 	int      totalpe       1	1						XYZ
+array 	int      vpdata        1	1						XYZ
+
+# Task 1 actions
+app 1
+  steps   over xgc.restart.f0.00600.bp
+      # read
+        read  next  xgc.restart.f0.00600.bp   io_T1  0.0
+
