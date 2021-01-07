@@ -36,6 +36,9 @@ int main(int argc, char **argv) {
   io.SetEngine("sst");
   adios2::Engine engine = io.Open("larray", adios2::Mode::Read);
 
+  std::vector<double> rtime;
+  MPI_Barrier(comm);
+  double timeStart = MPI_Wtime();
   while (engine.BeginStep() == adios2::StepStatus::OK) {
     size_t writerSize;
     int t = engine.CurrentStep();
@@ -59,8 +62,12 @@ int main(int argc, char **argv) {
     }
 
     engine.EndStep();
-
     MPI_Barrier(comm);
+    double timeEnd = MPI_Wtime();
+    rtime.push_back(timeEnd - timeStart);
+    if (rank == 0) {
+      printf("step %d read in %f s\n", t, rtime[t]);
+    }
 
     for (int i = 0; i < num_to_read; i++) {
       int target_rank = rank + i * comm_size;
@@ -71,6 +78,8 @@ int main(int argc, char **argv) {
                 target_rank, rank);
       }
     }
+
+    timeStart = MPI_Wtime();
   }
 
   engine.Close();
