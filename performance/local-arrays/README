@@ -1,0 +1,1 @@
+Make sure to have adios2-config in PATH when building. Change C++ compiler as necessary in the Makefile
